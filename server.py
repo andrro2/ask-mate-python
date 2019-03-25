@@ -1,6 +1,5 @@
-from flask import Flask, redirect, render_template, url_for, request
-
-import data_manager
+from flask import Flask, render_template, redirect, request
+import connection
 
 app = Flask(__name__)
 
@@ -8,7 +7,8 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/list')
 def list_route():
-    return render_template('list.html')
+    questions = connection.get_user_story(url_for('question.csv'))
+    return render_template('list.html', questions=questions)
 
 
 if __name__ == '__name__':

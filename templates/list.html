@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+</head>
+<body>
+    <h1>Questions</h1>
+    <table>
+        {%for i in questions%}
+        <tr>
+            {%for a in i%}
+            <td>{{i[a]}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

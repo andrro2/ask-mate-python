@@ -1,23 +1,43 @@
 import csv
+import os
 
-filename = '/home/rozner/codecool/web/1st_tw/ask-mate-python/sample_data/question.csv'
+
 DATA_HEADER = ['id','submission_time','view_number','vote_number','title','message','image']
 
-def get_user_story(story_id=None):
-    return get_csv_data(story_id)
+script_dir = os.path.dirname(__file__)
+question_rel_path = "sample_data/question.csv"
+QUESTION_FILEPATH = os.path.join(script_dir, question_rel_path)
+answer_rel_path = "sample_data/answer.csv"
+ANSWER_FILEPATH = os.path.join(script_dir, answer_rel_path)
 
-def get_csv_data(filename, one_user_story_id=None):
+
+def get_question_data(question_id=None):
     user_questions = []
 
-    with open(filename, encoding='utf-8') as csvfile:
+    with open(QUESTION_FILEPATH, encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
 
         for row in reader:
-            user_story = dict(row)
+            question = dict(row)
 
-            if one_user_story_id is not None and one_user_story_id == user_story['id']:
-                return user_story
+            if question_id is not None and question_id == question['id']:
+                return question
 
-            user_questions.append(user_story)
+            user_questions.append(question)
     return user_questions
+
+
+def get_answer_data(question_id=None):
+    user_answers = []
+
+    with open(ANSWER_FILEPATH, encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            answer = dict(row)
+
+            if question_id is not None and question_id == answer['question_id']:
+                user_answers.append(answer)
+
+    return user_answers
 

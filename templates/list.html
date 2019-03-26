@@ -6,14 +6,8 @@
 </head>
 <body>
     <h1>Questions</h1>
-    <table>
-        {%for i in questions%}
-        <tr>
-            {%for a in i%}
-            <td>{{i[a]}}</td>
-            {%endfor%}
-        </tr>
+        {%for question in questions%}
+            <br><a href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{question['title']}}</a><br>
         {%endfor%}
-    </table>
 </body>
 </html>

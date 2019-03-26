@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{question['title']}}</title>
+</head>
+<body>
+    <a href="{{url_for('list_route')}}">Go back</a>
+    <h1>{{question['title']}}</h1>
+    <table>
+        <tr>
+            {% for items in question.keys() %}
+            <th><strong>{{items}}</strong></th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {%for key in question%}
+            <td><strong>{{question[key]}}</strong></td>
+            {%endfor%}
+        </tr>
+    </table>
+    <h2>Answers:</h2>
+    <table>
+        {%for items in answers%}
+        <tr>
+            <th><strong>{{items.keys()}}</strong></th>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

@@ -44,7 +44,7 @@ def add_question():
     return render_template('add_question.html')
 
 
-@app.route('/question/<question_id>/add_answer', methods = ['GET', 'POST'])
+@app.route('/question/<question_id>/add_answer', methods=['GET', 'POST'])
 def add_answer(question_id: int):
     if request.method == 'POST':
         message = request.form.get('message')
@@ -55,6 +55,20 @@ def add_answer(question_id: int):
         return redirect(f'/question/{question_id}')
 
     return render_template('add_answer.html', question_id=question_id)
+
+
+@app.route('/question/<question_id>/remove', methods=['GET', 'POST'])
+def remove_question(question_id):
+    data_manager.remove_question(QUESTION_FILEPATH, question_id)
+    return redirect('/list')
+
+
+@app.route('/question/<question_id>/remove_answer_<answer_id>')
+def remove_answer(answer_id, question_id):
+    print(answer_id, question_id)
+    data_manager.remove_answers(answer_id)
+    return redirect(f'/question/{question_id}')
+
 
 if __name__ == '__main__':
     app.run(

@@ -26,12 +26,14 @@
             {%for items in answers[0]%}
             <th><strong>{{items}}</strong></th>
             {%endfor%}
+            <th>Remove</th>
         </tr>
         {%for items in answers%}
         <tr>
             {%for a in items%}
             <td>{{items[a]}}</td>
             {%endfor%}
+            <td><a href="{{url_for('remove_answer', answer_id = items['id'], question_id = question_id)}}">Remove</a></td>
         </tr>
         {%endfor%}
     </table>

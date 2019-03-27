@@ -7,7 +7,8 @@
 <body>
     <h1>Questions</h1>
         {%for question in questions%}
-            <br><a href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{question['title']}}</a><br>
+            <br><a href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{question['title']}}</a><br><br>
+            <a href="{{url_for('remove_question', question_id = question['id'])}}">Remove question</a><br><br>
         {%endfor%}
     <br><a href="/add_question"><strong>Add new Question</strong></a>
 </body>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/add_question", method="POST">
+        <p>
+            <label for="add">Add a question here:</label><br>
+            <input id="add" name="title" value="Title of your question">
+        </p>
+        <p>
+            <label for="text_add"></label>
+            <textarea name="message" id="text_add" cols="40" rows="4" required></textarea>
+        </p>
+        <p>
+            <label for="picture">Picture</label>
+            <input name="image">
+        </p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+</body>
+</html>

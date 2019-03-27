@@ -9,5 +9,6 @@
         {%for question in questions%}
             <br><a href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{question['title']}}</a><br>
         {%endfor%}
+    <br><a href="/add_question"><strong>Add new Question</strong></a>
 </body>
 </html>

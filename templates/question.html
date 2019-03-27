@@ -21,11 +21,22 @@
     </table>
     <h2>Answers:</h2>
     <table>
+
+        <tr>
+            {%for items in answers[0]%}
+            <th><strong>{{items}}</strong></th>
+            {%endfor%}
+        </tr>
         {%for items in answers%}
         <tr>
-            <th><strong>{{items.keys()}}</strong></th>
+            {%for a in items%}
+            <td>{{items[a]}}</td>
+            {%endfor%}
         </tr>
         {%endfor%}
     </table>
+    <br>
+    <a href="{{url_for('add_answer', question_id = question_id)}}">Add answer</a>
+    <br>
 </body>
 </html>

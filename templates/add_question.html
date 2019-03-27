@@ -2,12 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ask a question</title>
+    <style>
+        body {
+            background-color: ivory;
+            font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            margin-left: 20px;
+        }
+        h1 {
+            color: firebrick;
+        }
+        a {
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: olive;
+            transition: ease-in-out;
+        }
+        h2 {
+            margin-bottom: 0;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <form action="/add_question", method="POST">
         <p>
-            <label for="add">Add a question here:</label><br>
+            <label for="add">Add a question here:</label><br><br>
             <input id="add" name="title" value="Title of your question">
         </p>
         <p>

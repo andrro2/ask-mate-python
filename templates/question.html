@@ -3,6 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>{{question['title']}}</title>
+    <style>
+        body {
+            background-color: ivory;
+            margin-left: 20px;
+            font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+        }
+        h1 {
+            color: firebrick;
+        }
+        p {
+            margin-top: 20px;
+        }
+        a {
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding-top: 30px;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: olive;
+            transition: ease-in-out;
+        }
+
+        strong {
+            margin-left: 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px;
+        }
+        td {
+            text-align: justify;
+        }
+    </style>
 </head>
 <body>
     <a href="{{url_for('list_route')}}">Go back</a>
@@ -15,11 +50,11 @@
         </tr>
         <tr>
             {%for key in question%}
-            <td><strong>{{question[key]}}</strong></td>
+            <td>{{question[key]}}</td>
             {%endfor%}
         </tr>
     </table>
-    <h2>Answers:</h2>
+    <h2>Answers</h2>
     <table>
 
         <tr>
@@ -38,7 +73,7 @@
         {%endfor%}
     </table>
     <br>
-    <a href="{{url_for('add_answer', question_id = question_id)}}">Add answer</a>
+    <p><a href="{{url_for('add_answer', question_id = question_id)}}" id="add">Add answer</a></p>
     <br>
 </body>
 </html>

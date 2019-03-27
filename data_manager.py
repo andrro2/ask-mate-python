@@ -50,7 +50,6 @@ def get_whole_answer_data():
         for row in reader:
             answer = dict(row)
             answers.append(answer)
-    print(answers)
     return answers
 
 

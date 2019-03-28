@@ -1,33 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/static/theme.css">
     <meta charset="UTF-8">
     <title>Add answer</title>
-    <style>
-        body {
-            background-color: ivory;
-            font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
-            margin-left: 20px;
-        }
-        a {
-            text-decoration: none;
-            margin-left: 20px;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: olive;
-            transition: ease-in-out;
-        }
-        label {
-            font-weight: bold;
-        }
-    </style>
+
 </head>
 <body>
- <h2>Your answer to the question</h2>
+ <h2>Your answer to the question:</h2>
  <form action="{{ url_for('add_answer', question_id=question_id) }}", method="POST">
      <textarea name="message" rows="16" cols="60"></textarea>
-     <br><br>
+     <br>
      <input type="submit" value="Submit answer">
  </form>
 </body>

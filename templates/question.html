@@ -1,85 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/static/theme.css">
     <meta charset="UTF-8">
-    <title>{{question['title']}}</title>
-    <style>
-        body {
-            background-color: ivory;
-            margin-left: 20px;
-            font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
-        }
-        h1 {
-            color: firebrick;
-        }
-        p {
-            margin-top: 20px;
-        }
-        a {
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding-top: 30px;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: olive;
-            transition: ease-in-out;
-        }
+    <title>{{ question['title'] }}</title>
 
-        strong {
-            margin-left: 0;
-        }
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 15px;
-        }
-        td {
-            text-align: justify;
-        }
-    </style>
 </head>
 <body>
-    <a href="{{url_for('list_route')}}">Go back</a>
-    <h1>{{question['title']}}</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Submission time</th>
-            <th>View number</th>
-            <th>Vote number</th>
-            <th>Title</th>
-            <th>Message</th>
-            <th>Image</th>
-        </tr>
-        <tr>
-            {%for key in question%}
-            <td>{{question[key]}}</td>
-            {%endfor%}
-        </tr>
-    </table>
-    <h2>Answers</h2>
-    <table>
+<a style="font-style: normal" href="{{ url_for('list_route') }}"><strong>Go back</strong></a>
+<h1>{{ question['title'] }}</h1>
+<table cellspacing="0" cellpadding="15">
+    <tr>
+        <th>ID</th>
+        <th>Submission time</th>
+        <th>View number</th>
+        <th>Message</th>
+        <th>Image</th>
+    </tr>
+    <tr>
+        {% for key in question %}
+            {% if key != 'vote_number' and key!= 'title' %}
+                <td>{{ question[key] }}</td>
+            {% endif %}
+        {% endfor %}-
+    </tr>
+</table>
+<p style="position: absolute;right: 25%" >Upvotes: {{ question['vote_number'] }}</p>
+<h2>Answers</h2>
+<table cellspacing="0" cellpadding="15">
 
+    <tr>
+        <th>ID</th>
+        <th>Submission time</th>
+        <th>Question ID</th>
+        <th>Message</th>
+        <th>Image</th>
+    </tr>
+    {% for items in answers %}
         <tr>
-            <th>ID</th>
-            <th>Submission time</th>
-            <th>Vote number</th>
-            <th>Question ID</th>
-            <th>Message</th>
-            <th>Image</th>
+            {% for a in items %}
+                {% if a != 'vote_number' %}
+                    <td>{{ items[a] }}</td>
+                {% endif %}
+            {% endfor %}
+            <td><a style="color: #3CEAE3;text-decoration: underline; font-weight: normal"
+                   href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">Remove</a>
+            </td>
+            <td style="font-style: italic;color: #F4A261">Upvotes: {{ items['vote_number'] }}</td>
         </tr>
-        {%for items in answers%}
-        <tr>
-            {%for a in items%}
-            <td>{{items[a]}}</td>
-            {%endfor%}
-            <td><a href="{{url_for('remove_answer', answer_id = items['id'], question_id = question_id)}}">Remove</a></td>
-        </tr>
-        {%endfor%}
-    </table>
-    <br>
-    <p><a href="{{url_for('add_answer', question_id = question_id)}}" id="add">Add answer</a></p>
-    <br>
+    {% endfor %}
+</table>
+<br>
+<a style="text-decoration: underline;color: #F6D55C;" href="{{ url_for('add_answer', question_id = question_id) }}" id="add"><strong>Add
+    answer:</strong></a>
+<br>
 </body>
 </html>

@@ -61,7 +61,9 @@
             {%for items in answers[0]%}
             <th><strong>{{items}}</strong></th>
             {%endfor%}
+            {%if answers|length > 0 %}
             <th>Remove</th>
+            {%endif%}
         </tr>
         {%for items in answers%}
         <tr>

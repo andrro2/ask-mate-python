@@ -65,7 +65,6 @@ def remove_question(question_id):
 
 @app.route('/question/<question_id>/remove_answer_<answer_id>')
 def remove_answer(answer_id, question_id):
-    print(answer_id, question_id)
     data_manager.remove_answers(answer_id)
     return redirect(f'/question/{question_id}')
 

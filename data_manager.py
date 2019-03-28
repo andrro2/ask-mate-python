@@ -94,7 +94,6 @@ def write_data(filepath, fieldnames, data):
 def remove_question(question_data_path, question_id):
     remove_answers(question_id)
     data = get_question_data()
-    print(data)
     for index, item in enumerate(data):
         if question_id == item['id']:
             data.pop(index)
@@ -102,7 +101,6 @@ def remove_question(question_data_path, question_id):
 
 
 def remove_answers(answer_id=None, question_id=None):
-    print(answer_id, question_id)
     data = get_whole_answer_data()
     if question_id is not None:
         for index, item in enumerate(data):

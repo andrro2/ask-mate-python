@@ -1,0 +1,43 @@
+a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-style: italic;
+}
+
+body {
+    background-color: #173F5F;
+}
+
+h1{
+    color: #F6D55C;
+}
+
+h2 {
+    color: #F6D55C;
+}
+
+td {
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+table {
+    border-color: whitesmoke;
+    width: 80%;
+    text-align-all: justify;
+}
+
+p {
+    font-weight: bold;
+    font-style: italic;
+    color: #F4A261;
+
+}
+
+br {
+    line-height: 2;
+}
+
+th{
+    color: #F4A261;
+}

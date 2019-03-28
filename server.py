@@ -3,7 +3,7 @@ import data_manager
 import time
 import os
 
-QUESTION_DATA_HEADER = ['id','submission_time','view_number','vote_number','title','message','image']
+QUESTION_DATA_HEADER = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
 ANSWWER_DATA_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 script_dir = os.path.dirname(__file__)
 question_rel_path = "sample_data/question.csv"
@@ -12,6 +12,7 @@ answer_rel_path = "sample_data/answer.csv"
 ANSWER_FILEPATH = os.path.join(script_dir, answer_rel_path)
 
 app = Flask(__name__)
+
 
 @app.route('/')
 @app.route('/list')
@@ -74,4 +75,4 @@ if __name__ == '__main__':
         host='0.0.0.0',
         port=8000,
         debug=True
-        )
+    )

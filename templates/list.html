@@ -36,7 +36,8 @@
     <h1>AskMate</h1>
     <h2>Questions</h2>
         {%for question in questions%}
-            <br><a href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{question['title']}}</a><br>
+            <br><a href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{question['title']}}</a><br><br>
+            <a href="{{url_for('remove_question', question_id = question['id'])}}">Remove question</a><br><br>
         {%endfor%}
     <br><p><a href="/add_question" class="add-answer"><strong>Add new Question</strong></a></p>
 </body>

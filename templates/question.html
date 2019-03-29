@@ -7,52 +7,66 @@
 
 </head>
 <body>
-<a style="font-style: normal" href="{{ url_for('list_route') }}"><strong>Go back</strong></a>
-<h1>{{ question['title'] }}</h1>
-<table cellspacing="0" cellpadding="15">
-    <tr>
-        <th>ID</th>
-        <th>Submission time</th>
-        <th>View number</th>
-        <th>Message</th>
-        <th>Image</th>
-    </tr>
-    <tr>
-        {% for key in question %}
-            {% if key != 'vote_number' and key!= 'title' %}
-                <td>{{ question[key] }}</td>
-            {% endif %}
-        {% endfor %}-
-    </tr>
-</table>
-<p style="position: absolute;right: 25%" >Upvotes: {{ question['vote_number'] }}</p>
-<h2>Answers</h2>
-<table cellspacing="0" cellpadding="15">
-
-    <tr>
-        <th>ID</th>
-        <th>Submission time</th>
-        <th>Question ID</th>
-        <th>Message</th>
-        <th>Image</th>
-    </tr>
-    {% for items in answers %}
+<div class="sticky" align="center">
+    <a style="font-style: normal" href="{{ url_for('list_route') }}">&#128281</a>
+    <p>@Ask-Mate!</p>
+</div>
+<div class=question_title><h1>{{ question['title'] }}</h1></div>
+<div class="question_table">
+    <table cellspacing="0" cellpadding="15">
         <tr>
-            {% for a in items %}
-                {% if a != 'vote_number' %}
-                    <td>{{ items[a] }}</td>
+            <th>ID</th>
+            <th>Submission time</th>
+            <th>View number</th>
+            <th>Message</th>
+            <th>Image</th>
+        </tr>
+        <tr>
+            {% for key in question %}
+                {% if key != 'vote_number' and key!= 'title' %}
+                    {% if key == 'message' %}
+                        <td style="word-break: break-word">{{ question[key] }}</td>
+                    {% else %}
+                        <td>{{ question[key] }}</td>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
-            <td><a style="color: #3CEAE3;text-decoration: underline; font-weight: normal"
-                   href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">Remove</a>
-            </td>
-            <td style="font-style: italic;color: #F4A261">Upvotes: {{ items['vote_number'] }}</td>
         </tr>
-    {% endfor %}
-</table>
-<br>
-<a style="text-decoration: underline;color: #F6D55C;" href="{{ url_for('add_answer', question_id = question_id) }}" id="add"><strong>Add
-    answer:</strong></a>
-<br>
+    </table>
+    <p style="position: absolute;right: 25%">Upvotes: {{ question['vote_number'] }}</p>
+</div>
+<div class="answer_title"><h2>Answers: </h2></div>
+<div class="answer_table">
+    <br><br>
+    <table cellspacing="0" cellpadding="15">
+        <tr>
+            <th>ID</th>
+            <th>Submission time</th>
+            <th>Message</th>
+            <th>Image</th>
+        </tr>
+        {% for items in answers %}
+            <tr>
+                {% for a in items %}
+                    {% if a != 'vote_number' and a != 'question_id' %}
+                        {% if a == 'message' %}
+                            <td style="word-break: break-word">{{ items[a] }}</td>
+                        {% else %}
+                            <td>{{ items[a] }}</td>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <td><a style="color: #3CEAE3;text-decoration: underline; font-weight: normal"
+                       href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">Remove</a>
+                </td>
+                <td style="font-style: italic;color: #F4A261">Upvotes: {{ items['vote_number'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="add-answer"><a style="text-decoration: underline;color: #F6D55C;"
+                           href="{{ url_for('add_answer', question_id = question_id) }}"
+                           id="add"><strong>Add new
+    answer</strong></a></div>
 </body>
 </html>

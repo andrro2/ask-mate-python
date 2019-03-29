@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <link rel="stylesheet" href="/static/theme.css">
     <meta charset="UTF-8">
@@ -7,14 +7,18 @@
 
 </head>
 <body>
-<h1 align="center">AskMate</h1>
-    <h2>Questions:</h2>
+<div align="center" class="sticky"><p>@Ask-Mate!</p></div>
+<div class="inlined-right"><h2>Questions:</h2></div>
+<div class='absolute'>
     {% for question in questions %}
         <br><strong><a style="font-style: normal"
-            href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{ question['title'] }}</a></strong>
+                       href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{ question['title'] }}</a></strong>
         <br>
-        <a style="text-decoration: underline; color: #3CEAE3" href="{{ url_for('remove_question', question_id = question['id']) }}">Remove question</a><br>
+        <a style="text-decoration: underline; color: #3CEAE3"
+           href="{{ url_for('remove_question', question_id = question['id']) }}">Remove question</a><br>
     {% endfor %}
-    <br><a style="color: #F6D55C;text-decoration: underline" href="/add_question" class="add-answer"><strong>Add new Question:</strong></a>
+    <br><a style="color: #F6D55C;text-decoration: underline" href="/add_question" class="add-answer"><strong>Add new
+    question</strong></a>
+</div>
 </body>
 </html>

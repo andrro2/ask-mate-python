@@ -11,7 +11,7 @@
     <a style="font-style: normal" href="{{ url_for('list_route') }}">&#128281</a>
     <p>@Ask-Mate!</p>
 </div>
-<div class=question_title><h1>{{ question['title'] }}</h1></div>
+<div class="question_title"><h1>{{ question['title'] }}</h1></div>
 <div class="question_table">
     <table cellspacing="0" cellpadding="15">
         <tr>
@@ -34,10 +34,12 @@
         </tr>
     </table>
     <p style="position: absolute;right: 25%">Upvotes: {{ question['vote_number'] }}</p>
-</div>
-<div class="answer_title"><h2>Answers: </h2></div>
-<div class="answer_table">
-    <br><br>
+    <h2>Answers: </h2>
+    <a style="text-decoration: underline;color: #F6D55C;"
+       href="{{ url_for('add_answer', question_id = question_id) }}"
+       id="add"><strong>Add new
+        answer</strong></a>
+    <br>
     <table cellspacing="0" cellpadding="15">
         <tr>
             <th>ID</th>
@@ -64,9 +66,5 @@
         {% endfor %}
     </table>
 </div>
-<div class="add-answer"><a style="text-decoration: underline;color: #F6D55C;"
-                           href="{{ url_for('add_answer', question_id = question_id) }}"
-                           id="add"><strong>Add new
-    answer</strong></a></div>
 </body>
 </html>

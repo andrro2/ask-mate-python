@@ -57,42 +57,18 @@ div.sticky {
 
 }
 
-div.inlined-right {
-    position: fixed;
-    top: 50px;
-    left: 17%;
-}
-
-
-div.absolute {
-    margin: auto;
+div.absolute{
+    margin: 0;
     position: absolute;
-    top: 100px;
-    left: 20%
+    top: 150px;
+    left: 25%;
 }
 
-div.back {
-    margin: auto;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 37px;
-    font-size: xx-large;
-    left: 15px;
-}
-
-
-div.answer_title {
+div.inlined-right{
+    margin: 0;
     position: absolute;
-    top: 250px;
-    left: 7%;
-
-}
-
-div.answer_table {
-    position: absolute;
-    top: 250px;
-    bottom: 10%;
-    left: 17%;
+    top: 90px;
+    left: 20%;
 }
 
 div.question_title {
@@ -107,7 +83,7 @@ div.question_table {
     left: 17%;
 }
 
-div.add-answer{
+div.add-answer {
     margin: 0;
     position: absolute;
     top: 340px;

@@ -1,15 +1,8 @@
 from flask import Flask, render_template, redirect, request, url_for
 import data_manager
-import time
-import os
+from datetime import datetime
 
-QUESTION_DATA_HEADER = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
-ANSWWER_DATA_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
-script_dir = os.path.dirname(__file__)
-question_rel_path = "sample_data/question.csv"
-QUESTION_FILEPATH = os.path.join(script_dir, question_rel_path)
-answer_rel_path = "sample_data/answer.csv"
-ANSWER_FILEPATH = os.path.join(script_dir, answer_rel_path)
+
 
 app = Flask(__name__)
 
@@ -24,10 +17,9 @@ def list_route():
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def route_selected_question(question_id: int):
     question = data_manager.get_question_data(question_id)
-    question['submission_time'] = time.ctime(float(question['submission_time']))
     answers = data_manager.get_answer_data(question_id)
-    for item in answers:
-        item['submission_time'] = time.ctime(float(item['submission_time']))
+    print(question)
+    print(answers)
     return render_template('question.html', question=question, answers=answers, question_id=question_id)
 
 
@@ -37,10 +29,10 @@ def add_question():
         message = request.form.get("message")
         title = request.form.get('title')
         image = request.form.get('image')
-        data = data_manager.update_question_data(title, message, image)
-        question_id = data[-1]['id']
-        filepath = QUESTION_FILEPATH
-        data_manager.write_data(filepath, QUESTION_DATA_HEADER, data)
+        view_number = 0
+        vote_number = 0
+        submission_time = datetime.now()
+        data_manager.add_question(message, title, image, view_number, vote_number, submission_time)
         return redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 

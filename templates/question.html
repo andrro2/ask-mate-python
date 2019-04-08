@@ -22,14 +22,16 @@
             <th>Image</th>
         </tr>
         <tr>
-            {% for key in question %}
-                {% if key != 'vote_number' and key!= 'title' %}
-                    {% if key == 'message' %}
-                        <td style="word-break: break-word">{{ question[key] }}</td>
-                    {% else %}
-                        <td>{{ question[key] }}</td>
+            {% for item in question %}
+                {% for key in item %}
+                    {% if key != 'vote_number' and key!= 'title' %}
+                        {% if key == 'message' %}
+                            <td style="word-break: break-word">{{ item[key] }}</td>
+                        {% else %}
+                            <td>{{ item[key] }}</td>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
+                {% endfor %}
             {% endfor %}
         </tr>
     </table>

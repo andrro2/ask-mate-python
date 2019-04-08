@@ -1,45 +1,40 @@
-import csv
+
 import time
 import os
-
-QUESTION_DATA_HEADER = ['id','submission_time','view_number','vote_number','title','message','image']
-ANSWWER_DATA_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
-
-script_dir = os.path.dirname(__file__)
-question_rel_path = "sample_data/question.csv"
-QUESTION_FILEPATH = os.path.join(script_dir, question_rel_path)
-answer_rel_path = "sample_data/answer.csv"
-ANSWER_FILEPATH = os.path.join(script_dir, answer_rel_path)
+import connection
 
 
-def get_question_data(question_id=None):
-    user_questions = []
 
-    with open(QUESTION_FILEPATH, encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
 
-        for row in reader:
-            question = dict(row)
-
-            if question_id is not None and question_id == question['id']:
-                return question
-
-            user_questions.append(question)
+@connection.connection_handler
+def get_question_data(cursor, question_id=None):
+    if question_id:
+        cursor.execute("""
+                        select * from question where id = %(question_id)s 
+                        """,{'question_id': question_id})
+        user_questions = cursor.fetchall()
+    else:
+        cursor.execute("""
+                        select * from question;
+                        """)
+        user_questions = cursor.fetchall()
     return user_questions
 
+@connection.connection_handler
+def add_question(cursor, message, title, image, view_number, vote_number, submission_time):
+    cursor.execute("""
+                    insert into question (submission_time, view_number, vote_number, title, message, image)
+                    values (%s, %s, %s, %s, %s, %s);
+                    """, (submission_time, view_number,vote_number, title, message, image))
 
-def get_answer_data(question_id=None):
-    question_answers = []
 
-    with open(ANSWER_FILEPATH, encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
 
-        for row in reader:
-            answer = dict(row)
-
-            if question_id is not None and question_id == answer['question_id']:
-                question_answers.append(answer)
-
+@connection.connection_handler
+def get_answer_data(cursor, question_id=None):
+    cursor.execute("""
+                    select * from answer where question_id = %(question_id)s
+                    """, {'question_id' : question_id})
+    question_answers = cursor.fetchall()
     return question_answers
 
 
@@ -52,25 +47,6 @@ def get_whole_answer_data():
             answer = dict(row)
             answers.append(answer)
     return answers
-
-
-def generate_new_id(existing_data):
-    new_id = 0
-    for item in existing_data:
-        if int(item['id']) >= new_id:
-            new_id = int(item['id']) + 1
-    return new_id
-
-
-def update_question_data(title, message, image):
-    existing_data = get_question_data()
-    id = generate_new_id(existing_data)
-    submission_time = time.time()
-    wiew_number = 0
-    vote_number = 0
-    dict = {'id':id, 'submission_time': submission_time, 'view_number': wiew_number, 'vote_number':vote_number, 'title':title, 'message':message, 'image':image}
-    existing_data.append(dict)
-    return existing_data
 
 
 def update_answer_data(message, image, question_id):

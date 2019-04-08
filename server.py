@@ -32,7 +32,8 @@ def add_question():
         view_number = 0
         vote_number = 0
         submission_time = datetime.now()
-        data_manager.add_question(message, title, image, view_number, vote_number, submission_time)
+        question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time)[0]['id']
+        print(question_id)
         return redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 
@@ -41,10 +42,10 @@ def add_question():
 def add_answer(question_id: int):
     if request.method == 'POST':
         message = request.form.get('message')
-        picture = request.form.get('picture')
-        data = data_manager.update_answer_data(message, picture, question_id)
-        filepath = ANSWER_FILEPATH
-        data_manager.write_data(filepath, ANSWWER_DATA_HEADER, data)
+        image = request.form.get('picture')
+        submission_time = datetime.now()
+        vote_number = 0
+        data_manager.add_answer(submission_time, vote_number, question_id, message, image)
         return redirect(f'/question/{question_id}')
 
     return render_template('add_answer.html', question_id=question_id)
@@ -52,7 +53,7 @@ def add_answer(question_id: int):
 
 @app.route('/question/<question_id>/remove', methods=['GET', 'POST'])
 def remove_question(question_id):
-    data_manager.remove_question(QUESTION_FILEPATH, question_id)
+    data_manager.remove_question(question_id)
     return redirect('/list')
 
 

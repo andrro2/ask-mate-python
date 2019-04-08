@@ -1,6 +1,3 @@
-
-import time
-import os
 import connection
 
 
@@ -26,7 +23,9 @@ def add_question(cursor, message, title, image, view_number, vote_number, submis
                     insert into question (submission_time, view_number, vote_number, title, message, image)
                     values (%s, %s, %s, %s, %s, %s);
                     """, (submission_time, view_number,vote_number, title, message, image))
-
+    cursor.execute("""select id from question where submission_time = %(submission_time)s""",{'submission_time': submission_time})
+    question_id = cursor.fetchall()
+    return question_id
 
 
 @connection.connection_handler
@@ -38,55 +37,25 @@ def get_answer_data(cursor, question_id=None):
     return question_answers
 
 
-def get_whole_answer_data():
-    answers = []
-    with open(ANSWER_FILEPATH, encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-
-        for row in reader:
-            answer = dict(row)
-            answers.append(answer)
-    return answers
+@connection.connection_handler
+def add_answer(cursor, submission_time, vote_number, question_id, message, image):
+    cursor.execute("""
+                    insert into answer (submission_time, vote_number, question_id, message, image)
+                    values (%s, %s, %s, %s, %s)
+                    """, (submission_time, vote_number, question_id, message, image))
 
 
-def update_answer_data(message, image, question_id):
-    existing_data = get_whole_answer_data()
-    id = generate_new_id(existing_data)
-    submission_time = time.time()
-    vote_number = 0
-    dict = {'id': id, 'submission_time': submission_time, 'vote_number': vote_number, 'question_id': question_id, 'message': message, 'image': image}
-    existing_data.append(dict)
-    return existing_data
+@connection.connection_handler
+def remove_question(cursor, question_id):
+    cursor.execute("""
+                    delete from answer where question_id = %(question_id)s;
+                    delete from question where id = %(question_id)s;
+                    """,{'question_id': question_id})
 
 
-def write_data(filepath, fieldnames, data):
-    with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for row in data:
-            writer.writerow(row)
-
-
-def remove_question(question_data_path, question_id):
-    remove_answers(question_id=question_id)
-    data = get_question_data()
-    for index, item in enumerate(data):
-        if question_id == item['id']:
-            data.pop(index)
-    write_data(question_data_path, QUESTION_DATA_HEADER, data)
-
-
-def remove_answers(answer_id=None, question_id=None):
-    indexes = []
-    data = get_whole_answer_data()
-    if question_id is not None:
-        for index in range(-(len(data)),0):
-            if question_id == data[index]['question_id']:
-                data.pop(index)
-        write_data(ANSWER_FILEPATH, ANSWWER_DATA_HEADER, data)
-    else:
-        for index, item in enumerate(data):
-            if answer_id == item['id']:
-                data.pop(index)
-        write_data(ANSWER_FILEPATH, ANSWWER_DATA_HEADER, data)
+@connection.connection_handler
+def remove_answers(cursor, answer_id):
+    cursor.execute("""
+                    delete from answer where id = %(answer_id)s
+                    """,{'answer_id': answer_id})
 

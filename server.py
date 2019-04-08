@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, url_for
 import data_manager
 import time
 import os
+from datetime import datetime
 
 QUESTION_DATA_HEADER = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
 ANSWWER_DATA_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
@@ -24,11 +25,8 @@ def list_route():
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def route_selected_question(question_id: int):
     question = data_manager.get_question_data(question_id)
-    question['submission_time'] = time.ctime(float(question['submission_time']))
     answers = data_manager.get_answer_data(question_id)
-    for item in answers:
-        item['submission_time'] = time.ctime(float(item['submission_time']))
-    return render_template('question.html', question=question, answers=answers, question_id=question_id)
+    return render_template('question.html', question=question, question_id=question_id, answers=answers)
 
 
 @app.route('/add_question', methods=['GET', 'POST'])
@@ -37,10 +35,11 @@ def add_question():
         message = request.form.get("message")
         title = request.form.get('title')
         image = request.form.get('image')
-        data = data_manager.update_question_data(title, message, image)
-        question_id = data[-1]['id']
-        filepath = QUESTION_FILEPATH
-        data_manager.write_data(filepath, QUESTION_DATA_HEADER, data)
+        view_number = 0
+        vote_number = 0
+        submission_time = datetime.now()
+        question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time)[0]['id']
+        print(question_id)
         return redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 
@@ -49,10 +48,10 @@ def add_question():
 def add_answer(question_id: int):
     if request.method == 'POST':
         message = request.form.get('message')
-        picture = request.form.get('picture')
-        data = data_manager.update_answer_data(message, picture, question_id)
-        filepath = ANSWER_FILEPATH
-        data_manager.write_data(filepath, ANSWWER_DATA_HEADER, data)
+        image = request.form.get('picture')
+        submission_time = datetime.now()
+        vote_number = 0
+        data_manager.add_answer(submission_time, vote_number, question_id, message, image)
         return redirect(f'/question/{question_id}')
 
     return render_template('add_answer.html', question_id=question_id)
@@ -60,7 +59,7 @@ def add_answer(question_id: int):
 
 @app.route('/question/<question_id>/remove', methods=['GET', 'POST'])
 def remove_question(question_id):
-    data_manager.remove_question(QUESTION_FILEPATH, question_id)
+    data_manager.remove_question(question_id)
     return redirect('/list')
 
 

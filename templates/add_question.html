@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="/static/theme.css" >
-    <meta charset="UTF-8">
-    <title>Ask a question</title>
-
-</head>
-<body>
-    <form action="/add_question", method="POST">
-        <p>
-            <label for="add"><h2>Add a question here:</h2></label>
-            <input id="add" name="title" value="Title of your question">
-        </p><br>
-        <p>
-            <label for="text_add"></label>
+{% extends 'layout.html' %}
+{% block content %}
+    <form action="/add_question" , method="POST">
+        <div id="new_q_a">
+            <p>Add question</p>
+            <input type="text" id="add" name="title" value="Title of your question"><br>
             <textarea name="message" id="text_add" cols="40" rows="4" required></textarea>
-        </p>
-        <p>
-            <label for="picture"><h2>Picture</h2></label>
-            <input name="image">
-        </p>
-        <p><input type="submit" value="Submit"></p>
+            <p>Picture</p>
+            <input name="image"><br>
+            <input id="submit_q_a" type="submit" value="Submit">
+        </div>
     </form>
-</body>
-</html>
+{% endblock %}

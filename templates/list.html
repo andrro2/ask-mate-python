@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="/static/theme.css">
-    <meta charset="UTF-8">
-    <title>AskMate</title>
-
-</head>
-<body>
-<div align="center" class="sticky"><p>@Ask-Mate!</p></div>
-<div class="inlined-right"><h2>Questions:</h2></div>
-<div class='absolute'>
-    {% for question in questions %}
-        <br><strong><a style="font-style: normal"
-                       href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{ question['title'] }}</a></strong>
-        <br>
-        <a style="text-decoration: underline; color: #3CEAE3"
-           href="{{ url_for('remove_question', question_id = question['id']) }}">Remove question</a><br>
-    {% endfor %}
-    <br><a style="color: #F6D55C;text-decoration: underline" href="/add_question" class="add-answer"><strong>Add new
-    question</strong></a>
-</div>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block content %}
+    <p id="topFive">Top 5 questions</p>
+    <div id='absolute'>
+        {% for question in questions %}
+            <br><strong><a id="questions"
+                           href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{ question['title'] }}</a></strong>
+            <br>
+            <a id="remove"
+               href="{{ url_for('remove_question', question_id = question['id']) }}">Remove question</a><br>
+        {% endfor %}
+        <br><a id="remove" href="/add_question" class="add-answer"><strong>Add
+        new
+        question</strong></a></div>
+{% endblock %}

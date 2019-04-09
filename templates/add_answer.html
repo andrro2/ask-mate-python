@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="/static/theme.css">
-    <meta charset="UTF-8">
-    <title>Add answer</title>
-
-</head>
-<body>
- <h2>Your answer to the question:</h2>
- <form action="{{ url_for('add_answer', question_id=question_id) }}", method="POST">
-     <textarea name="message" rows="16" cols="60"></textarea>
-     <br>
-     <input type="submit" value="Submit answer">
- </form>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block content %}
+    <form action="{{ url_for('add_answer', question_id=question_id) }}" , method="POST">
+        <div id="new_q_a">
+            <p>Your answer to the question:</p>
+            <textarea name="message" rows="20" cols="40"></textarea>
+            <br>
+            <input id="submit_q_a" type="submit" value="Submit answer">
+        </div>
+    </form>
+{% endblock %}

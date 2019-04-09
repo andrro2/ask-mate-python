@@ -33,7 +33,6 @@ def add_question():
         vote_number = 0
         submission_time = datetime.now()
         question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time)[0]['id']
-        print(question_id)
         return redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 
@@ -61,6 +60,12 @@ def remove_question(question_id):
 def remove_answer(answer_id, question_id):
     data_manager.remove_answers(answer_id)
     return redirect(f'/question/{question_id}')
+
+
+@app.route('/?<search>')
+def search(search):
+    questions, answers, comments = data_manager.search(search)
+    return render_template('search.html', questions=questions, answers=answers, comments=comments, search=search)
 
 
 if __name__ == '__main__':

@@ -69,8 +69,8 @@ def remove_question(cursor, question_id):
 @connection.connection_handler
 def remove_answers(cursor, answer_id):
     cursor.execute("""
-                    delete from comment where answer_id = %(answer_id)s
-                    delete from answer where id = %(answer_id)s
+                    delete from comment where answer_id = %(answer_id)s;
+                    delete from answer where id = %(answer_id)s;
                     """,{'answer_id': answer_id})
 
 

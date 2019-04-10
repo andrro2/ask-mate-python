@@ -31,15 +31,30 @@ def add_answer(cursor, submission_time, vote_number, question_id, message, image
 @connection.connection_handler
 def remove_question(cursor, question_id):
     cursor.execute("""
-                    DELETE from answer where question_id = %(question_id)s;
-                    DELETE from question where id = %(question_id)s;""", {'question_id': question_id})
+                    select id from answer where question_id = %(question_id)s
+                    
+                    """, {'question_id':question_id})
+    answer_ids = cursor.fetchall()
+    for item in answer_ids:
+        answer_id = item['id']
+        cursor.execute("""
+                        delete from comment where answer_id = %(answer_id)s;
+                        """, {'answer_id': answer_id})
+
+    cursor.execute("""
+                    delete from comment where question_id = %(question_id)s;
+                    delete from question_tag where question_id = %(question_id)s;
+                    delete from answer where question_id = %(question_id)s;
+                    delete from question where id = %(question_id)s;
+                    """,{'question_id': question_id})
 
 
 @connection.connection_handler
 def remove_answers(cursor, answer_id):
     cursor.execute("""
-                    DELETE from answer
-                    where id = %(answer_id)s;""", {'answer_id': answer_id})
+                    delete from comment where answer_id = %(answer_id)s;
+                    delete from answer where id = %(answer_id)s;0
+                    """,{'answer_id': answer_id})
 
 @connection.connection_handler
 def add_question(cursor, message, title, image, view_number, vote_number, submission_time):
@@ -116,3 +131,28 @@ def edit_answer(cursor, answer_id, message):
                     update answer
                     set message = %(message)s
                     where id = %(answer_id)s;""", {'message': message, 'answer_id': answer_id})
+
+
+@connection.connection_handler
+def search(cursor, search):
+    cursor.execute("""
+                    select title, message from question
+                    where message like %(search)s or title like %(search)s
+                    """, {'search': search})
+    questions = cursor.fetchall()
+
+    cursor.execute("""
+                        select message from answer
+                        where message like %(search)s
+                        """, {'search': search})
+    answers = cursor.fetchall()
+
+    cursor.execute("""
+                        select message from comment
+                        where message like %(search)s
+                        """, {'search': search})
+    comments = cursor.fetchall()
+    return questions, answers, comments
+
+
+

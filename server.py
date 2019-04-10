@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 import data_manager
 from datetime import datetime
 
@@ -88,6 +88,12 @@ def add_answer_comment(answer_id: int):
         data_manager.add_comment_to_answer(answer_id, user_comment, now_time)
         return redirect('/')
     return render_template('add_comment.html')
+
+
+@app.route('/?<search>')
+def search(search):
+    questions, answers, comments = data_manager.search(search)
+    return render_template('search.html', questions=questions, answers=answers, comments=comments, search=search)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/theme.css">
+    <meta charset="UTF-8">
+    <title>Ask-mate</title>
+</head>
+<body>
+<div id="header"></div>
+<div id="list_top_5"><a>List top 5 questions</a></div>
+<div id="navigation"><a>List all questions</a></div>
+<div id="search">
+    <form style="padding: 3px 3px;" action="/search" method="post">
+        <a id="ask_mate" href="/">Ask-Mate</a>
+        <input name="search" type="search">
+        <input type="submit" value="Search">
+    </form>
+</div>
+{% block content %} {% endblock %}
+
+
+</body>
+</html>

@@ -70,7 +70,7 @@ def remove_question(cursor, question_id):
 def remove_answers(cursor, answer_id):
     cursor.execute("""
                     delete from comment where answer_id = %(answer_id)s;
-                    delete from answer where id = %(answer_id)s;
+                    delete from answer where id = %(answer_id)s;0
                     """,{'answer_id': answer_id})
 
 

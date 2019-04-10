@@ -1,21 +1,16 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request
 import data_manager
-import time
-import os
 from datetime import datetime
-
-QUESTION_DATA_HEADER = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
-ANSWWER_DATA_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
-script_dir = os.path.dirname(__file__)
-question_rel_path = "sample_data/question.csv"
-QUESTION_FILEPATH = os.path.join(script_dir, question_rel_path)
-answer_rel_path = "sample_data/answer.csv"
-ANSWER_FILEPATH = os.path.join(script_dir, answer_rel_path)
 
 app = Flask(__name__)
 
 
 @app.route('/')
+def latest_questions():
+    questions = data_manager.get_latest_five_questions()
+    return render_template('main.html', questions=questions)
+
+
 @app.route('/list')
 def list_route():
     questions = sorted(data_manager.get_question_data(), key=lambda key: key['submission_time'], reverse=True)
@@ -26,7 +21,14 @@ def list_route():
 def route_selected_question(question_id: int):
     question = data_manager.get_question_data(question_id)
     answers = data_manager.get_answer_data(question_id)
-    return render_template('question.html', question=question, question_id=question_id, answers=answers)
+    question_comments = data_manager.get_question_comment(question_id)
+    answer_ids = data_manager.get_answer_ids(question_id)
+    answer_comments = {}
+    for a_id in answer_ids:
+        for i in a_id:
+            answer_comments[a_id[i]] = (data_manager.get_answer_comment(a_id[i]))
+    return render_template('question.html', question=question, question_id=question_id, answers=answers,
+                           question_comments=question_comments, answer_comments=answer_comments)
 
 
 @app.route('/add_question', methods=['GET', 'POST'])
@@ -39,7 +41,6 @@ def add_question():
         vote_number = 0
         submission_time = datetime.now()
         question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time)[0]['id']
-        print(question_id)
         return redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 
@@ -67,6 +68,26 @@ def remove_question(question_id):
 def remove_answer(answer_id, question_id):
     data_manager.remove_answers(answer_id)
     return redirect(f'/question/{question_id}')
+
+
+@app.route('/question/<question_id>/add_comment', methods=['GET', 'POST'])
+def add_question_comment(question_id: int):
+    if request.method == 'POST':
+        user_comment = request.form.get('comment')
+        now_time = datetime.now()
+        data_manager.add_comment_to_question(question_id, user_comment, now_time)
+        return redirect(f'/question/{question_id}')
+    return render_template('add_comment.html')
+
+
+@app.route('/answer/<answer_id>/add_comment', methods=['GET', 'POST'])
+def add_answer_comment(answer_id: int):
+    if request.method == 'POST':
+        user_comment = request.form.get('comment')
+        now_time = datetime.now()
+        data_manager.add_comment_to_answer(answer_id, user_comment, now_time)
+        return redirect('/')
+    return render_template('add_comment.html')
 
 
 if __name__ == '__main__':

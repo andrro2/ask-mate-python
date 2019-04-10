@@ -10,7 +10,6 @@ def latest_questions():
     questions = data_manager.get_latest_five_questions()
     return render_template('main.html', questions=questions)
 
-
 @app.route('/list')
 def list_route():
     questions = sorted(data_manager.get_question_data(), key=lambda key: key['submission_time'], reverse=True)

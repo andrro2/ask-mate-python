@@ -269,3 +269,15 @@ input[type=text], textarea {
 #submit_q_a:hover {
   background-color: #444;
 }
+
+#q_comments {
+    position: absolute;
+    left: 70%;
+    top: 10%;
+}
+
+#a_comment {
+    position: absolute;
+    top: 90%;
+    left: 30%;
+}

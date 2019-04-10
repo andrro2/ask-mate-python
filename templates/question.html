@@ -1,11 +1,30 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div id="question_title">{{ question[0]['title'] }}</div>
-    <div id="message">{{ question[0]['message'] }}<br>
-        <p id="time">{{ question[0]['submission_time'] }}</p>
-    </div>
-    <p id="answer_head">Answers:</p>
-    <a id="add_answer"
+<div class="question_title"><h1>{{ question['title'] }}</h1></div>
+<div class="question_table">
+    <table cellspacing="0" cellpadding="15">
+        <tr>
+            <th>ID</th>
+            <th>Submission time</th>
+            <th>View number</th>
+            <th>Message</th>
+            <th>Image</th>
+        </tr>
+        <tr>
+            {% for key in question %}
+                {% if key != 'vote_number' and key!= 'title' %}
+                    {% if key == 'message' %}
+                        <td style="word-break: break-word">{{ question[key] }}</td>
+                    {% else %}
+                        <td>{{ question[key] }}</td>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    <p style="position: absolute;right: 25%">Upvotes: {{ question['vote_number'] }}</p>
+    <h2>Answers: </h2>
+    <a style="text-decoration: underline;color: #F6D55C;"
        href="{{ url_for('add_answer', question_id = question_id) }}"
        id="add"><strong>Add new
         answer</strong></a>

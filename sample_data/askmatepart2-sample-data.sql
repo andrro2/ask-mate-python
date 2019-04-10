@@ -17,6 +17,7 @@ ALTER TABLE IF EXISTS ONLY public.tag DROP CONSTRAINT IF EXISTS pk_tag_id CASCAD
 ALTER TABLE IF EXISTS ONLY public.question_tag DROP CONSTRAINT IF EXISTS fk_tag_id CASCADE;
 
 DROP TABLE IF EXISTS public.question;
+DROP SEQUENCE IF EXISTS public.question_id_seq;
 CREATE TABLE question (
     id serial NOT NULL,
     submission_time timestamp without time zone,
@@ -28,6 +29,7 @@ CREATE TABLE question (
 );
 
 DROP TABLE IF EXISTS public.answer;
+DROP SEQUENCE IF EXISTS public.answer_id_seq;
 CREATE TABLE answer (
     id serial NOT NULL,
     submission_time timestamp without time zone,
@@ -38,6 +40,7 @@ CREATE TABLE answer (
 );
 
 DROP TABLE IF EXISTS public.comment;
+DROP SEQUENCE IF EXISTS public.comment_id_seq;
 CREATE TABLE comment (
     id serial NOT NULL,
     question_id integer,
@@ -55,6 +58,7 @@ CREATE TABLE question_tag (
 );
 
 DROP TABLE IF EXISTS public.tag;
+DROP SEQUENCE IF EXISTS public.tag_id_seq;
 CREATE TABLE tag (
     id serial NOT NULL,
     name text

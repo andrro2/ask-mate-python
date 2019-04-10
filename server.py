@@ -96,6 +96,15 @@ def search(search):
     return render_template('search.html', questions=questions, answers=answers, comments=comments, search=search)
 
 
+@app.route('/answer/<answer_id>/edit', methods=['GET', 'POST'])
+def edit_answer(answer_id: int):
+    if request.method == 'POST':
+        edited_answer = request.form.get('edit')
+        data_manager.edit_answer(answer_id, edited_answer)
+        return redirect('/')
+    return render_template('edit_answer.html', answer_id=answer_id)
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

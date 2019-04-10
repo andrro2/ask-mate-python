@@ -108,3 +108,11 @@ def get_latest_five_questions(cursor):
                     order by submission_time desc limit 5;""")
     latest_questions = cursor.fetchall()
     return latest_questions
+
+
+@connection.connection_handler
+def edit_answer(cursor, answer_id, message):
+    cursor.execute("""
+                    update answer
+                    set message = %(message)s
+                    where id = %(answer_id)s;""", {'message': message, 'answer_id': answer_id})

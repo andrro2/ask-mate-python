@@ -126,12 +126,12 @@ def get_latest_five_questions(cursor):
 
 
 @connection.connection_handler
-def get_answer_ids(cursor, question_id):
+def edit_answer(cursor, answer_id, message):
     cursor.execute("""
-                    select id from answer
-                    where question_id = %(question_id)s;""", {'question_id': question_id})
-    ids = cursor.fetchall()
-    return ids
+                    update answer
+                    set message = %(message)s
+                    where id = %(answer_id)s;""", {'message': message, 'answer_id': answer_id})
+
 
 @connection.connection_handler
 def search(cursor, search):

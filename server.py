@@ -81,8 +81,9 @@ def add_question_comment(question_id: int):
     return render_template('add_comment_question.html', question_id=question_id)
 
 
-@app.route('/answer/<answer_id><question_id>/add_comment', methods=['GET', 'POST'])
+@app.route('/answer/<question_id>&<answer_id>/add_comment', methods=['GET', 'POST'])
 def add_answer_comment(answer_id: int, question_id: int):
+    print(answer_id)
     if request.method == 'POST':
         user_comment = request.form.get('comment')
         now_time = datetime.now()

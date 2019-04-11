@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <p id="topFive">Top 5 questions</p>
     <div id='absolute'>
         {% for question in questions %}
             <br><strong><a id="questions"
@@ -9,7 +8,7 @@
             <a id="remove"
                href="{{ url_for('remove_question', question_id = question['id']) }}">Remove question</a><br>
         {% endfor %}
-        <br><a id="remove" href="/add_question" class="add-answer"><strong>Add
+        <br><a id="add-question" href="/add_question" class="add-answer"><strong>Add
         new
         question</strong></a></div>
 {% endblock %}

@@ -1,3 +1,10 @@
+body {
+    background-color: lightyellow;
+    margin: 0;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 
 #header {
     background-color: rgba(100, 100, 100, 0.4);
@@ -25,15 +32,22 @@
     padding: 5px 5px;
     border-radius: 4px;
     display: inline-block;
-
-
 }
 
 #navigation:hover {
     background-color: rgba(0, 0, 0, 0.8);
-    color: whitesmoke;
+    color: lightblue;
     padding: 5px 5px;
     border-radius: 4px;
+}
+
+#navigation a {
+    text-decoration: none;
+    color: black;
+}
+
+#navigation a:hover {
+    color: lightblue;
 }
 
 
@@ -44,15 +58,6 @@
     font-weight: bold;
     top: 0;
     background-color: rgba(0, 0, 0, 0.4);
-}
-
-
-body {
-    background-image: url("/static/paper.jpg");
-    background-size: cover;
-    margin: 0;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -67,11 +72,13 @@ body {
 
 #remove {
     background-color: rgba(0, 0, 0, 0.2);
-    font-size: large;
+    font-size: small;
+    font-style: italic;
     color: black;
     padding: 5px 5px;
     border-radius: 4px;
     display: inline-block;
+    margin-top: 4px;
 }
 
 #remove:hover {
@@ -150,8 +157,8 @@ body {
     display: inline-block;
     position: absolute;
     font-weight: bold;
-    top: 60%;
-    left: 15%;
+    top: 55%;
+    left: 72%;
 }
 
 #add_answer:hover {
@@ -171,15 +178,23 @@ body {
     padding: 5px 5px;
     border-radius: 4px;
     display: inline-block;
-
 }
-
 
 #list_top_5:hover {
     background-color: rgba(0, 0, 0, 0.8);
-    color: whitesmoke;
+    color: lightblue;
     border-radius: 4px;
 }
+
+#list_top_5 a {
+    text-decoration: none;
+    color: black;
+}
+
+#list_top_5 a:hover {
+    color: lightblue;
+}
+
 
 input, a {
     cursor: pointer;
@@ -219,8 +234,7 @@ br {
 #answer {
     position: absolute;
     top: 65%;
-    left: 22%;
-    margin: 10px 30px;
+    margin: 10px auto;
     border: 1px solid;
     border-radius: 7px;
     padding: 8px 8px;
@@ -231,11 +245,11 @@ br {
     position: absolute;
     font-weight: bold;
     font-size: large;
-    top: 50%;
+    top: 58%;
     left: 15%;
 }
 
-#new_q_a {
+.form-box {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 7px 7px;
     display: compact;
@@ -272,8 +286,13 @@ input[type=text], textarea {
 
 #q_comments {
     position: absolute;
-    left: 70%;
-    top: 10%;
+    left: 75%;
+    top: 15%;
+    padding: .5rem;
+}
+
+#q_comments table th {
+    text-align: left;
 }
 
 #a_comment {
@@ -281,3 +300,21 @@ input[type=text], textarea {
     top: 90%;
     left: 30%;
 }
+
+#add-question {
+    background-color: rgba(0, 0, 0, 0.2);
+    font-size: larger;
+    color: black;
+    padding: 5px 5px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+#add-question:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: lightblue;
+    padding: 5px 5px;
+    border-radius: 4px;
+}
+

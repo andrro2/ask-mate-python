@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add comment</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <form action="#" method="post">
-        <label for="comment">Your comment</label>
-        <textarea id="comment" name="comment"></textarea>
-        <input type="submit" value="Submit">
+        <div class="form-box">
+            <label for="comment">Your comment</label>
+            <textarea id="comment" name="comment"></textarea>
+            <input type="submit" value="Submit">
+        </div>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -6,22 +6,18 @@
     </div>
     <div id="q_comments">
         <a href="{{ url_for('add_question_comment', question_id = question_id) }}">Add comment</a><br>
-        <table>
-            <tr>
-                <th>Comments:</th>
-            </tr>
+        <p>Comments:</p>
+        <ol>
             {% for comment in question_comments %}
-            <tr>
-                <td>{{ comment['message'] }}</td>
-            </tr>
+            <li>{{ comment['message'] }}</li>
             {% endfor %}
-        </table>
+        </ol>
     </div>
-    <p id="answer_head">Answers:</p>
     <a id="add_answer"
        href="{{ url_for('add_answer', question_id = question_id) }}"
        id="add"><strong>Add new
         answer</strong></a>
+    <p id="answer_head">Answers:</p>
     <table id="answer">
         {% if answers == [] %}
             <tr>

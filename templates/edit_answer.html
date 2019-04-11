@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit answer</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% block content %}
     <form action="/answer/{{ answer_id }}/edit" method="post">
-        <label for="edit">Edit answer</label>
-        <textarea id="edit" name="edit"></textarea>
-        <input type="submit" value="Submit">
+        <div class="form-box">
+            <label for="edit">Edit answer</label>
+            <textarea id="edit" name="edit"></textarea>
+            <input type="submit" value="Submit">
+        </div>
     </form>
-</body>
-</html>
+{% endblock %}

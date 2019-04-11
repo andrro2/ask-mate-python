@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
     <form action="/add_question" , method="POST">
-        <div id="new_q_a">
+        <div class="form-box">
             <p>Add question</p>
             <input type="text" id="add" name="title" value="Title of your question"><br>
             <textarea name="message" id="text_add" cols="40" rows="4" required></textarea>

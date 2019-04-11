@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
     <form action="{{ url_for('add_answer', question_id=question_id) }}" , method="POST">
-        <div id="new_q_a">
+        <div class="form-box">
             <p>Your answer to the question:</p>
             <textarea name="message" rows="20" cols="40"></textarea>
             <br>

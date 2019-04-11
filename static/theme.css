@@ -21,16 +21,33 @@
     font-family: Courier New;
     font-size: large;
     color: whitesmoke;
-    padding: 1px 1px;
+    margin: 2% 0% 0% 0%;
     border-radius: 4px;
     border: 1px solid;
     display: inline-block;
 
 }
 
+#back_to_q {
+    text-decoration: none;
+    font-family: Courier New;
+    font-size: large;
+    color: whitesmoke;
+    margin: 2% 0% 0% 0%;
+    border-radius: 4px;
+    border: 1px solid;
+    display: inline-block;
+
+}
+
+#back_to_q:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 15px 15px rgba(255, 255, 255, 0.2);
+
+}
+
 
 #navigation_link:hover {
-    padding: 5px 5px;
     border-radius: 4px;
     box-shadow: 0px 0px 35px 25px rgba(0, 0, 0, 0.4);
 }
@@ -58,8 +75,8 @@ body {
     color: whitesmoke;
     font-family: Courier New;
     font-size: xx-large;
-    padding: 1px 10px;
-
+    padding: 0px 0px;
+    margin: 2% 0% 3% 0%;
 
 }
 
@@ -86,8 +103,8 @@ body {
 }
 
 #questions:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 0px 30px 25px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 25px 25px rgba(0, 0, 0, 0.5);
     color: whitesmoke;
     padding: 2px 2px;
     border-radius: 4px;
@@ -123,6 +140,24 @@ td {
     display: inline-block;
     font-weight: bold;
 
+}
+
+#search_box {
+    padding: 5px 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#add_form {
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: xx-large;
+    font-family: Courier New;
+    color: whitesmoke;
+    margin: 7% 0% 0% 0%;
+    display: inline-block;
+    box-shadow: 0px 0px 25px 35px rgba(0, 0, 0, 0.4);
 }
 
 #add_answer:hover {
@@ -177,7 +212,7 @@ input, a {
 }
 
 #upvote {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 100px;
     color: whitesmoke;
     padding: 0px 12px;

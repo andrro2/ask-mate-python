@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div id="search">
-        <p align="center"><a id="navigation_link" href="/list">Back to the questions</a></p>
-    </div>
+        <p align="center"><a id="back_to_q" href="/list">Back to the questions</a></p>
+    </div><br>
     <p id="titles">{{ question[0]['title'] }}</p>
     <div id="message">{{ question[0]['message'] }}<br>
         <div id="q_comments">
@@ -43,7 +43,7 @@
                             {% endif %}
                         {% endfor %}
                         <td><a id="remove"
-                               href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">&#10060;</a>
+                               href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">&#x2613</a>
                         </td>
                         <td id="upvote">{{ items['vote_number'] }}</td>
                         <td><a id="add_comment"

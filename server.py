@@ -99,13 +99,14 @@ def search():
     return render_template('main.html', questions=questions, search=search)
 
 
-@app.route('/answer/<answer_id>/edit', methods=['GET', 'POST'])
-def edit_answer(answer_id: int):
+@app.route('/answer/<answer_id>&<question_id>/edit', methods=['GET', 'POST'])
+def edit_answer(answer_id: int, question_id: int):
+    text = request.args.get('text')
     if request.method == 'POST':
         edited_answer = request.form.get('edit')
         data_manager.edit_answer(answer_id, edited_answer)
-        return redirect('/')
-    return render_template('edit_answer.html', answer_id=answer_id)
+        return redirect(f'/question/{question_id}')
+    return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
 
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def latest_questions():
     questions = data_manager.get_latest_five_questions()
-    return render_template('main.html', questions=questions)
+    return render_template('list.html', questions=questions)
 
 @app.route('/list')
 def list_route():
@@ -89,10 +89,11 @@ def add_answer_comment(answer_id: int):
     return render_template('add_comment.html')
 
 
-@app.route('/?<search>')
-def search(search):
-    questions, answers, comments = data_manager.search(search)
-    return render_template('search.html', questions=questions, answers=answers, comments=comments, search=search)
+@app.route('/search')
+def search():
+    search = '%' + request.args.get('search') +'%'
+    questions = data_manager.search(search)
+    return render_template('list.html', questions=questions, search=search)
 
 
 @app.route('/answer/<answer_id>/edit', methods=['GET', 'POST'])

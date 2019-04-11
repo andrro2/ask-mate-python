@@ -7,10 +7,10 @@
 </head>
 <body>
 <div id="header"></div>
-<div id="list_top_5"><a>List top 5 questions</a></div>
-<div id="navigation"><a>List all questions</a></div>
+<div id="list_top_5"><a href="{{ url_for('latest_questions') }}">List top 5 questions</a></div>
+<div id="navigation"><a href="{{ url_for('list_route') }}">List all questions</a></div>
 <div id="search">
-    <form style="padding: 3px 3px;" action="/search" method="post">
+    <form style="padding: 3px 3px;" action="/search" method="get">
         <a id="ask_mate" href="/">Ask-Mate</a>
         <input name="search" type="search">
         <input type="submit" value="Search">

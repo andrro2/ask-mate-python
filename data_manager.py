@@ -136,23 +136,14 @@ def edit_answer(cursor, answer_id, message):
 @connection.connection_handler
 def search(cursor, search):
     cursor.execute("""
-                    select title, message from question
-                    where message like %(search)s or title like %(search)s
+                    select DISTINCT question.* from answer
+                    join question on question.id = answer.question_id
+                    where answer.message ilike %(search)s or question.title ilike %(search)s or question.message ilike %(search)s;
+                    
                     """, {'search': search})
     questions = cursor.fetchall()
 
-    cursor.execute("""
-                        select message from answer
-                        where message like %(search)s
-                        """, {'search': search})
-    answers = cursor.fetchall()
-
-    cursor.execute("""
-                        select message from comment
-                        where message like %(search)s
-                        """, {'search': search})
-    comments = cursor.fetchall()
-    return questions, answers, comments
+    return questions
 
 
 

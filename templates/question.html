@@ -1,60 +1,68 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div id="question_title">{{ question[0]['title'] }}</div>
+    <div id="search">
+        <p align="center"><a id="navigation_link" href="/list">Back to the questions</a></p>
+    </div>
+    <p id="titles">{{ question[0]['title'] }}</p>
     <div id="message">{{ question[0]['message'] }}<br>
-        <p id="time">{{ question[0]['submission_time'] }}</p>
+        <div id="q_comments">
+            <table>
+                {% for comment in question_comments %}
+                    <tr>
+                        <td id="com_time">{{ comment['submission_time'] }}</td>
+                        <td id="a_comment">{{ comment['message'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <a id="add_comment" href="{{ url_for('add_question_comment', question_id = question_id) }}">Add comment</a>
+        <p id="question_time">{{ question[0]['submission_time'] }}</p>
     </div>
-    <div id="q_comments">
-        <a href="{{ url_for('add_question_comment', question_id = question_id) }}">Add comment</a><br>
-        <p>Comments:</p>
-        <ol>
-            {% for comment in question_comments %}
-            <li>{{ comment['message'] }}</li>
-            {% endfor %}
-        </ol>
-    </div>
-    <a id="add_answer"
-       href="{{ url_for('add_answer', question_id = question_id) }}"
-       id="add"><strong>Add new
-        answer</strong></a>
     <p id="answer_head">Answers:</p>
-    <table id="answer">
-        {% if answers == [] %}
-            <tr>
-                <td>There is no answer for this question.</td>
-            </tr>
-        {% else %}
-            <tr>
-                <th>Submission time</th>
-                <th>Message</th>
-                <th>Image</th>
-                <th>Comments</th>
-            </tr>
-            {% for items in answers %}
+    <div id="answer">
+        <table width="100%">
+            {% if answers == [] %}
                 <tr>
-                    {% for a in items %}
-                        {% if a != 'vote_number' and a != 'question_id' and a != 'id' %}
-                            {% if a == 'submission_time' %}
-                                <td id="time">{{ items[a] }}</td>
-                            {% elif a == 'message' %}
-                                <td><a href="{{ url_for('edit_answer', answer_id = items['id']) }}">{{ items[a] }}</a></td>
-                            {% else %}
-                                <td>{{ items[a] }}</td>
-                                <td><ol>
-                                {% for comment in answer_comments[items['id']] %}
-                                    <li>{{ comment['message'] }}</li>
-                                {% endfor %}
-                                </ol></td>
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                    <td><a id="remove"
-                           href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">&#10060;</a>
-                    </td>
-                    <td id="upvote">{{ items['vote_number'] }}</td>
-                    <td><a href="{{ url_for('add_answer_comment', answer_id = items['id']) }}">Add comment</a> </td>
+                    <td>There is no answer for this question.</td>
                 </tr>
-            {% endfor %}
-        {% endif %}
-    </table>
+            {% else %}
+                {% for items in answers %}
+                    <tr>
+                        {% for a in items %}
+                            {% if a != 'vote_number' and a != 'question_id' and a != 'id' %}
+                                {% if a == 'submission_time' %}
+                                    <td id="time">{{ items[a] }}</td>
+                                {% elif a == 'message' %}
+                                    <td width="500px"><a
+                                            style="word-break: break-word;color: whitesmoke;text-decoration: none;"
+                                            href="{{ url_for('edit_answer', answer_id = items['id']) }}">{{ items[a] }}</a>
+                                    </td>
+                                {% else %}
+                                    <td>{{ items[a] }}</td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <td><a id="remove"
+                               href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">&#10060;</a>
+                        </td>
+                        <td id="upvote">{{ items['vote_number'] }}</td>
+                        <td><a id="add_comment"
+                               href="{{ url_for('add_answer_comment', answer_id = items['id'], question_id=question_id) }}">Add
+                            comment</a></td>
+                    </tr>
+                    {% for answer in answer_comments[items['id']] %}
+                        <tr>
+                            <td id="com_time">{{ answer['submission_time'] }}</td>
+                            <td id="a_comment">{{ answer['message'] }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </table>
+    </div><br><br>
+    <p align="center">
+        <a id="add_question"
+           href="{{ url_for('add_answer', question_id = question_id) }}"
+           id="add">Add new
+            answer &#x270E</a></p>
 {% endblock %}

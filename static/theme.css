@@ -1,14 +1,6 @@
-body {
-    background-color: lightyellow;
-    margin: 0;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 
 #header {
     background-color: rgba(100, 100, 100, 0.4);
-    position: absolute;
     top: 0;
     font-size: xx-large;
     width: 100%;
@@ -21,64 +13,63 @@ body {
     color: black;
     width: 100%;
 
+
 }
 
-#navigation {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.2);
-    font-size: large;
-    top: 68px;
-    left: 14%;
-    padding: 5px 5px;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-#navigation:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: lightblue;
-    padding: 5px 5px;
-    border-radius: 4px;
-}
-
-#navigation a {
+#navigation_link {
     text-decoration: none;
-    color: black;
+    font-family: Courier New;
+    font-size: large;
+    color: whitesmoke;
+    padding: 1px 1px;
+    border-radius: 4px;
+    border: 1px solid;
+    display: inline-block;
+
 }
 
-#navigation a:hover {
-    color: lightblue;
+
+#navigation_link:hover {
+    padding: 5px 5px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 35px 25px rgba(0, 0, 0, 0.4);
 }
 
 
 #search {
-    position: absolute;
     width: 100%;
     text-align: center;
     font-weight: bold;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 15px 30px rgba(0, 0, 0, 0.6);
 }
 
 
-#topFive {
-    position: absolute;
-    font-weight: bold;
-    font-size: large;
-    top: 20%;
-    left: 20%;
+body {
+    background-image: url("/static/laptop.jpg");
+    background-size: cover;
+    margin: 0% 0% 10% 0%;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#titles {
+    color: whitesmoke;
+    font-family: Courier New;
+    font-size: xx-large;
+    padding: 1px 10px;
+
 
 }
 
 #remove {
-    background-color: rgba(0, 0, 0, 0.2);
-    font-size: small;
-    font-style: italic;
-    color: black;
-    padding: 5px 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: large;
+    color: whitesmoke;
+    padding: 5px 10px;
     border-radius: 4px;
     display: inline-block;
-    margin-top: 4px;
 }
 
 #remove:hover {
@@ -88,116 +79,100 @@ body {
 }
 
 #questions {
-    position: static;
-    color: black;
-    font-weight: bold;
+    color: whitesmoke;
+    font-family: Courier New;
     text-decoration: none;
+    font-size: x-large;
 }
 
 #questions:hover {
-
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 30px 25px rgba(0, 0, 0, 0.4);
     color: whitesmoke;
-    padding: 5px 5px;
+    padding: 2px 2px;
     border-radius: 4px;
 
 }
 
 
 #absolute {
-    margin: 0;
-    position: absolute;
-    top: 150px;
-    left: 25%;
+    margin: 2% 5% 0% 5%;
+    color: whitesmoke;
 }
 
 
 #question_title {
-    position: absolute;
     font-weight: bold;
     font-size: large;
-    top: 20%;
-    left: 15%;
+    margin: 2%;
 }
 
-#question_table {
-    top: 160px;
-    position: absolute;
-    left: 4%;
-}
 
-#tables th {
-    background-color: rgba(0, 0, 0, 0.9);
-    color: whitesmoke;
-}
-
-#tables {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 70%;
-}
-
-#tables tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.2);
-    color: #000;
-}
-
-#tables tr:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #000;
+td {
+    padding: 0px 4px;
 }
 
 
 #add_answer {
     color: #000;
+    margin: 2% 20% 0% 20%;
     padding: 5px 5px;
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.2);
     font-size: large;
     display: inline-block;
-    position: absolute;
     font-weight: bold;
-    top: 55%;
-    left: 72%;
+
 }
 
 #add_answer:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: xx-large;
+    font-family: Courier New;
+    text-decoration: none;
     color: whitesmoke;
-    padding: 5px 5px;
-    border-radius: 4px;
-
-}
-
-#list_top_5 {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.2);
-    font-size: large;
-    top: 68px;
-    left: 1%;
-    padding: 5px 5px;
+    padding: 1px 1px;
     border-radius: 4px;
     display: inline-block;
+    box-shadow: 0px 0px 25px 35px rgba(0, 0, 0, 0.4);
+
 }
 
-#list_top_5:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: lightblue;
+#add_comment {
+    text-decoration: none;
+    font-family: Courier New;
+    font-size: small;
+    color: whitesmoke;
+    padding: 2px 2px;
+    border-radius: 4px;
+    border: 1px solid;
+}
+
+#add_comment:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 15px 15px rgba(255, 255, 255, 0.2);
+    padding: 2px 2px;
     border-radius: 4px;
 }
 
-#list_top_5 a {
+#add_question {
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: xx-large;
+    font-family: Courier New;
     text-decoration: none;
-    color: black;
-}
+    color: whitesmoke;
+    padding: 1px 1px;
+    border-radius: 4px;
+    display: inline-block;
+    box-shadow: 0px 0px 25px 35px rgba(0, 0, 0, 0.4);
 
-#list_top_5 a:hover {
-    color: lightblue;
+
 }
 
 
 input, a {
     cursor: pointer;
+    color: black;
 
 }
 
@@ -205,17 +180,18 @@ input, a {
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 100px;
     color: whitesmoke;
+    padding: 0px 12px;
 }
 
 
 #message {
-    position: absolute;
-    top: 25%;
-    border: 1px solid;
-    margin: 10px 30%;
-    padding: 8px 8px;
-    border-radius: 7px;
-    background-color: rgba(255, 255, 255, 0.5);
+    font-family: Courier New;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.6);
+    font-size: x-large;
+    color: whitesmoke;
+    margin: 2% 20% 0% 20%;
+
 }
 
 br {
@@ -223,40 +199,51 @@ br {
 }
 
 #time {
-    float: right;
-    display: inline-block;
+    text-align: left;
     font-style: italic;
     font-weight: lighter;
-    color: rgba(0, 0, 0, 0.6);
+    font-size: medium;
+    color: rgba(255, 255, 255, 0.6);
 }
 
+#question_time {
+    text-align: right;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: small;
+    color: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+    margin: 0% 0% 0% 65%;
+}
 
 #answer {
-    position: absolute;
-    top: 65%;
-    margin: 10px auto;
-    border: 1px solid;
-    border-radius: 7px;
+    font-family: Courier New;
+    margin: 5% 10% 0% 10%;
     padding: 8px 8px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.6);
+    font-size: large;
+    color: whitesmoke;
 }
 
 #answer_head {
-    position: absolute;
-    font-weight: bold;
-    font-size: large;
-    top: 58%;
-    left: 15%;
+    margin: 5% 10% 0% 10%;
+    font-size: x-large;
+    color: whitesmoke;
+    font-family: Courier New;
+    padding: 1px 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.6);
 }
 
-.form-box {
-    background-color: rgba(0, 0, 0, 0.2);
+#new_q_a {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid;
     border-radius: 7px 7px;
     display: compact;
     padding: 14px 14px;
-    position: absolute;
-    top: 17%;
-    left: 34%;
+    margin: 2% 25% 0% 25%;
+
 }
 
 input[type=text], textarea {
@@ -281,40 +268,24 @@ input[type=text], textarea {
 }
 
 #submit_q_a:hover {
-  background-color: #444;
+    background-color: #444;
 }
 
 #q_comments {
-    position: absolute;
-    left: 75%;
-    top: 15%;
-    padding: .5rem;
+    color: whitesmoke;
+    font-family: Courier New;
 }
 
-#q_comments table th {
-    text-align: left;
+#com_time {
+    text-align: right;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: small;
+    color: rgba(255, 255, 255, 0.6);
+
 }
 
 #a_comment {
-    position: absolute;
-    top: 90%;
-    left: 30%;
+    font-style: italic;
+    font-size: small;
 }
-
-#add-question {
-    background-color: rgba(0, 0, 0, 0.2);
-    font-size: larger;
-    color: black;
-    padding: 5px 5px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-top: 4px;
-}
-
-#add-question:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: lightblue;
-    padding: 5px 5px;
-    border-radius: 4px;
-}
-

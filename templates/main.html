@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div id="search">
+        <p align="center" id="titles">Top 5 questions</p>
+        <form style="padding: 3px 3px;" action="/search" method="get">
+            <input name="search" type="search">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <p align="center"><a id="navigation_link" href="/list">List all questions</a></p>
+    <div id='absolute'>
+        {% for question in questions %}
+            <br><strong><a id="questions"
+                           href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{ question['title'] }}</a></strong>
+            <a id="remove"
+               href="{{ url_for('remove_question', question_id = question['id']) }}">&#x2613</a><br>
+        {% endfor %}
+    </div>
+    <br><br>
+    <p align="center"><a id="add_question" href="/add_question">Add
+        new
+        question &#x270E</a></p>
+{% endblock %}

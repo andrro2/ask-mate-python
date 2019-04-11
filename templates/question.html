@@ -32,6 +32,7 @@
                 <th>Submission time</th>
                 <th>Message</th>
                 <th>Image</th>
+                <th>Comments</th>
             </tr>
             {% for items in answers %}
                 <tr>
@@ -43,6 +44,11 @@
                                 <td><a href="{{ url_for('edit_answer', answer_id = items['id']) }}">{{ items[a] }}</a></td>
                             {% else %}
                                 <td>{{ items[a] }}</td>
+                                <td><ol>
+                                {% for comment in answer_comments[items['id']] %}
+                                    <li>{{ comment['message'] }}</li>
+                                {% endfor %}
+                                </ol></td>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
@@ -54,20 +60,5 @@
                 </tr>
             {% endfor %}
         {% endif %}
-    </table>
-    <table id="a_comment">
-        <tr>
-            <th>Answer-id</th>
-            <th>Comment</th>
-        </tr>
-        {% for id in answer_comments %}
-            {% for comment in answer_comments[id] %}
-            <tr>
-                    <td>{{ id }}</td>
-                    <td>{{ comment['message'] }}</td>
-                    <td>{{ comment['submission_time'] }}</td>
-            </tr>
-            {% endfor %}
-        {% endfor %}
     </table>
 {% endblock %}

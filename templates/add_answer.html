@@ -1,11 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <form action="{{ url_for('add_answer', question_id=question_id) }}" , method="POST">
-        <div class="form-box">
-            <p>Your answer to the question:</p>
-            <textarea name="message" rows="20" cols="40"></textarea>
-            <br>
-            <input id="submit_q_a" type="submit" value="Submit answer">
+    <div align="center">
+        <div id="add_form">
+            <form action="{{ url_for('add_answer', question_id=question_id) }}" , method="POST">
+                <p>Your answer to the question</p>
+                <textarea name="message" rows="20" cols="40"></textarea>
+                <br>
+                <input id="submit_q_a" type="submit" value="Submit answer">
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}

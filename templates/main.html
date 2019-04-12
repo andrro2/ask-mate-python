@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div id="search">
-        <p align="center" id="titles">Top 5 questions</p>
-        <form style="padding: 3px 3px;" action="/search" method="get">
-            <input name="search" type="search">
-            <input type="submit" value="Search">
+        <p align="center" id="page_head">Latest questions</p>
+        <form action="/search" method="get">
+            <input id="search_box" name="search" type="search">
+            <input id="search_button" type="submit" value="Search">
         </form>
     </div>
     <p align="center"><a id="navigation_link" href="/list">List all questions</a></p>

@@ -1,11 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
-        <form action="{{ url_for('add_question_comment', question_id=question_id) }}" , method="POST">
-        <div id="new_q_a">
-            <p>Your comment:</p>
-            <textarea name="comment" rows="20" cols="40"></textarea>
-            <br>
-            <input id="submit_q_a" type="submit" value="Submit comment">
+    <div align="center">
+        <div id="add_form">
+            <form action="{{ url_for('add_question_comment', question_id=question_id) }}" , method="POST">
+                <p>Your comment</p>
+                <textarea name="comment" rows="20" cols="40"></textarea>
+                <br>
+                <input id="submit_q_a" type="submit" value="Submit comment">
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}

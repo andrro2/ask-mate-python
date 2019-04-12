@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <form action="/answer/{{ answer_id }}/edit" method="post">
-        <div class="form-box">
-            <label for="edit">Edit answer</label>
-            <textarea id="edit" name="edit"></textarea>
-            <input type="submit" value="Submit">
+    <div align="center">
+        <div id="add_form">
+            <form action={{ url_for('edit_answer', answer_id=answer_id, question_id=question_id)  }} method="post">
+                <label for="edit">Edit answer</label>
+                <textarea rows="25" name="edit">{{ text }}</textarea>
+                <input id="submit_q_a" type="submit" value="Submit">
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}

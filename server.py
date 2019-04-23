@@ -1,12 +1,15 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, make_response, session, escape
 import data_manager
 from datetime import datetime
 
 app = Flask(__name__)
 
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
 
 @app.route('/')
 def latest_questions():
+    user = 'admin'
     questions = data_manager.get_latest_five_questions()
     return render_template('main.html', questions=questions)
 
@@ -107,6 +110,14 @@ def edit_answer(answer_id: int, question_id: int):
         data_manager.edit_answer(answer_id, edited_answer)
         return redirect(f'/question/{question_id}')
     return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
+
+
+@app.route('/set-cookie')
+def cookie_insertion():
+    redirect_to_index = redirect('/')
+    response = make_response(redirect_to_index)
+    response.set_cookie('user', value = 'admin')
+    return response
 
 
 if __name__ == '__main__':

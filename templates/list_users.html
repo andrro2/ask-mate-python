@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div id="search">
+        <p align="center" id="page_head">All users</p>
+    </div>
+    <div>
+        <p align="center"><a class="to_home" href="/">Home page</a></p>
+    </div>
+    <div class="users">
+        {% for user_data in users %}
+            <p id="user_name">{{ user_data['user_name'] }}</p>
+            <p id="user_regist">Registered at :</p>
+            <p id="user_regist_time">{{ user_data['registration_time'] }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

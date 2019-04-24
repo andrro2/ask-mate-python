@@ -109,6 +109,11 @@ def edit_answer(answer_id: int, question_id: int):
     return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
 
 
+@app.route('/list-users')
+def list_users():
+    all_users = data_manager.list_all_users()
+    return render_template('list_users.html', users=all_users)
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

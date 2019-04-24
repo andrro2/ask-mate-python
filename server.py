@@ -169,7 +169,7 @@ def login(message=None):
                 session['username'] = user_name
                 return redirect('/')
             else:
-                message = 'Username or password is wrong!'
+                message = 'Wrong username or password!!'
         else:
             message = 'Username or password is wrong!'
     return render_template('login.html', message=message, action=action)

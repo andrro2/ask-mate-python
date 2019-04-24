@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, make_response, session, escape, url_for
 import data_manager
 from datetime import datetime
+import bcrypt
 import util
 
 app = Flask(__name__)
@@ -112,6 +113,24 @@ def edit_answer(answer_id: int, question_id: int):
     return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
 
 
+def create_user_data():
+    passwd = util.hash_password(request.form.get('password'))
+    user_data = {
+        'user_name': request.form.get('user_name'),
+        'password': passwd,
+        'registration_time': datetime.now()
+    }
+    return user_data
+
+
+@app.route('/registration', methods=['GET', 'POST'])
+def save_new_user():
+    if request.method == 'POST':
+        data_manager.add_new_user(create_user_data())
+        return redirect('/')
+    return render_template('login.html')
+
+  
 @app.route('/login', methods=['GET', 'POST'])
 def login(verified=None):
     if request.method == 'POST':

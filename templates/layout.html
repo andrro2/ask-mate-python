@@ -18,14 +18,14 @@
     </p>
     {% if session['username'] is defined %}
         <a href="{{ url_for('logout') }}">
-            <button>Logout</button>
+            <button id="logger">Logout</button>
         </a>
     {% else %}
-        <a href="{{ url_for('login') }}">
-            <button id="search_button">Login</button>
+        <a href="{{ url_for('login', action='Login') }}">
+            <button id="logger">Login</button>
         </a>
-        <a href="{{ url_for('save_new_user') }}">
-            <button id="search_button">Register</button>
+        <a href="{{ url_for('save_new_user', action='Sing up') }}">
+            <button id="logger">Sing up</button>
         </a>
     {% endif %}
 </div>

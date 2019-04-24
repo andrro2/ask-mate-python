@@ -17,23 +17,45 @@
 }
 
 #search_button {
-    padding: 6px 21px;
-    background: #ccc;
-    border: 0 none;
-    cursor: pointer;
-    border-radius: 5px;
-    color: rgba(0, 0, 0, .7);
+    background: none;
+    text-align: center;
+    border: 2px solid #3498db;
+    outline: none;
+    color: whitesmoke;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+#search_button:hover {
+    border-color: #2ecc71;
 }
 
 #navigation_link {
+    padding: 6px 21px;
+    cursor: pointer;
     text-decoration: none;
-    font-family: Courier New;
-    font-size: large;
+    background: rgba(0, 0, 0, 0.7);
+    margin: 0% 34% 0% -3%;
+    text-align: center;
+    border: 2px solid #3498db;
+    outline: none;
     color: whitesmoke;
-    margin: 2% 35% 1% -4%;
-    border-radius: 4px;
-    border: 1px solid;
-    display: inline-block;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+#add_comment {
+    padding: 6px 21px;
+    cursor: pointer;
+    font-size: small;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    border: 2px solid #3498db;
+    outline: none;
+    color: whitesmoke;
+    border-radius: 24px;
+    transition: 0.25s;
 
 }
 
@@ -41,24 +63,27 @@
     text-decoration: none;
     font-family: Courier New;
     font-size: large;
-    color: whitesmoke;
     margin: 2% 0% 0% 0%;
-    border-radius: 4px;
-    border: 1px solid;
-    display: inline-block;
+    padding: 6px 21px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    border: 2px solid #3498db;
+    outline: none;
+    color: whitesmoke;
+    border-radius: 24px;
+    transition: 0.25s;
 
 }
 
 #back_to_q:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 0px 15px 15px rgba(255, 255, 255, 0.2);
+    border-color: #2ecc71;
 
 }
 
 
 #navigation_link:hover {
-    border-radius: 4px;
-    box-shadow: 0px 0px 35px 25px rgba(0, 0, 0, 0.4);
+    border-color: #2ecc71;
 }
 
 
@@ -66,6 +91,7 @@
     width: 100%;
     text-align: center;
     font-weight: bold;
+    margin: 0% 0% 3% 0%;
     background-color: rgba(0, 0, 0, 0.6);
     box-shadow: 0px 0px 15px 30px rgba(0, 0, 0, 0.6);
 }
@@ -74,7 +100,7 @@
 body {
     background-image: url("/static/laptop.jpg");
     background-size: cover;
-    margin: 0% 0% 10% 0%;
+    margin: 0% 0% 15% 0%;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -91,17 +117,18 @@ body {
 
 #remove {
     background-color: rgba(0, 0, 0, 0.4);
+    border: 2px solid #6D0B0B;
     font-size: large;
     color: whitesmoke;
     padding: 5px 10px;
     border-radius: 4px;
     display: inline-block;
+    transition: 0.25s;
 }
 
 #remove:hover {
     background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 4px;
-    color: whitesmoke;
+    border-color: crimson;
 }
 
 #questions {
@@ -121,20 +148,22 @@ body {
 }
 
 .to_home {
+    background: none;
+    padding: 6px 15px;
     text-decoration: none;
+    outline: none;
     font-family: Courier New;
-    font-size: large;
+    font-size: medium;
     color: whitesmoke;
     margin: 2% 0% 1% 0%;
-    border-radius: 4px;
-    border: 1px solid;
-    display: inline-block;
-
+    border-radius: 24px;
+    border: 2px solid #3498db;
 }
 
 .to_home:hover {
-    border-radius: 4px;
-    box-shadow: 0px 0px 35px 25px rgba(0, 0, 0, 0.4);
+    color: whitesmoke;
+    text-decoration: none;
+    border-color:  #2ecc71;
 }
 
 
@@ -169,7 +198,7 @@ td {
 #add_answer {
     color: #000;
     margin: 2% 20% 0% 20%;
-    padding: 5px 5px;
+    padding: 0px 10px;
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.2);
     font-size: large;
@@ -179,22 +208,29 @@ td {
 }
 
 #search_box {
-    padding: 5px 5px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    background: none;
+    text-align: center;
+    border: 2px solid #2cee71;
+    outline: none;
+    color: whitesmoke;
+    border-radius: 24px;
+    transition: 0.25s;
 }
 
-#add_form {
-    background-color: rgba(0, 0, 0, 0.4);
-    font-size: xx-large;
+.add_form {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
     font-family: Courier New;
-    color: whitesmoke;
-    margin: 7% 0% 0% 0%;
+    margin: 4% 0% 0% 0%;
     display: inline-block;
-    box-shadow: 0px 0px 25px 35px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 25px 35px rgba(0, 0, 0, 0.7);
 }
+
+.add_form p {
+    color: whitesmoke;
+    font-size: xx-large;
+}
+
 
 #add_answer:hover {
     background-color: rgba(0, 0, 0, 0.4);
@@ -209,35 +245,29 @@ td {
 
 }
 
-#add_comment {
-    text-decoration: none;
-    font-family: Courier New;
-    font-size: small;
-    color: whitesmoke;
-    padding: 2px 2px;
-    border-radius: 4px;
-    border: 1px solid;
-}
 
 #add_comment:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 0px 15px 15px rgba(255, 255, 255, 0.2);
-    padding: 2px 2px;
-    border-radius: 4px;
+    border-color: #2ecc71;
+}
+#comment_table {
+    margin: 0% 0% 1% 0%;
 }
 
 #add_question {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 2% 0% 0% 0%;
     font-size: xx-large;
     font-family: Courier New;
     text-decoration: none;
     color: whitesmoke;
-    padding: 1px 1px;
-    border-radius: 4px;
+    border: 2px solid #3498db;
+    padding: 0px 10px;
+    border-radius: 24px;
     display: inline-block;
-    box-shadow: 0px 0px 25px 35px rgba(0, 0, 0, 0.4);
+}
 
-
+#add_question:hover {
+    border-color: #2ecc71;
 }
 
 
@@ -321,10 +351,7 @@ input[type=text], textarea {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    outline: none;
 }
 
 #submit_q_a {
@@ -395,6 +422,7 @@ input[type=text], textarea {
 }
 
 .logedin_as {
+    width: 50%;
     display: inline;
     text-align: right;
     position: absolute;
@@ -405,6 +433,8 @@ input[type=text], textarea {
     display: inline;
     color: whitesmoke;
     white-space: nowrap;
+    margin: 0;
+    font-size: medium;
 }
 
 .logedin_as button {
@@ -414,4 +444,124 @@ input[type=text], textarea {
 
 .logedin_as a {
     text-decoration: none;
+    margin: 0% 0% 0% 2%;
+}
+
+.logedin_as i {
+    font-size: xx-large;
+}
+
+.main_nav {
+    margin: 15px 0px 0px 0px;
+}
+
+.login_form {
+    background-color: rgba(0, 0, 0, 0.8);
+    font-family: Courier New;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: medium;
+    margin: 7% 0% 0% 0%;
+    display: inline-block;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0px 0px 25px 35px rgba(0, 0, 0, 0.8);
+}
+
+#user_data {
+    width: 280px;
+    background: none;
+    margin: 20px auto;
+    text-align: center;
+    display: block;
+    border: 2px solid #2cee71;
+    padding: 14px 10px;
+    outline: none;
+    color: whitesmoke;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+#user_data:focus {
+    width: 380px;
+    border-color: #3498db;
+}
+
+#user_data:after {
+    border-color: #3498db;
+}
+
+#submit_user {
+    background: none;
+    margin: 0px auto 10px;
+    text-align: center;
+    display: block;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    outline: none;
+    color: whitesmoke;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+#submit_user:hover {
+    border-color: #2ecc71;
+}
+
+#label {
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-size: x-large;
+}
+
+#error_message {
+    color: crimson;
+}
+
+#logger {
+    background: none;
+    text-align: center;
+    border: 2px solid #3498db;
+    outline: none;
+    color: whitesmoke;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+#logger:hover {
+    border-color: #2ecc71;
+}
+
+#textarea {
+    color: whitesmoke;
+    border: 2px solid #3498db;
+    border-radius: 24px;
+    transition: 0.25s;
+    background: none;
+
+}
+
+#textarea:focus {
+    border-color: #2ecc71;
+}
+
+#title {
+    outline: none;
+    text-align: center;
+    width: 280px;
+    color: whitesmoke;
+    border: 2px solid #3498db;
+    border-radius: 24px;
+    transition: 0.25s;
+    background: none;
+
+}
+
+#title:focus {
+    width: 380px;
+    border-color: #2ecc71;
+}
+
+#textarea:focus {
+    border-color: #2ecc71;
 }

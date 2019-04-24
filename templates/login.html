@@ -1,14 +1,28 @@
-{% extends 'layout.html' %}
-{% block content %}
-    <form method="POST">
-        <p>user name</p><br>
-        <input name="user_name" required><br>
-        <br><p>password</p><br>
-        <input name="password" type="password" required><br>
-        <input type="submit" value="Submit">
-        {% if verified == False %}
-            <p>User Name or Password is Wrong</p>
-        {% endif %}
-        <p>{{ message if message != None }}</p>
-    </form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/theme.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Ask-mate</title>
+</head>
+<body>
+    <div id="search">
+        <p align="center" id="page_head">Ask-mate</p>
+    </div>
+<div align="center">
+    <div class="login_form">
+        <form method="POST">
+        <h1 id="label">{{ action }}</h1>
+            <input id="user_data" type="text" autocomplete="off" name="user_name" placeholder="Enter username" required>
+            <input id="user_data" name="password" placeholder="Enter password" type="password" required><br style="line-height: 5px;">
+            <input id="submit_user" type="submit" value="Submit">
+            {% if verified == False %}
+                <p>User Name or Password is Wrong</p>
+            {% endif %}
+            <p id="error_message">{{ message if message != None and message != True }}</p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

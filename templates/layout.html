@@ -6,7 +6,9 @@
     <title>Ask-mate</title>
 </head>
 <body>
-<div id="header"></div>
+<div><p>{{ session['username'] }}</p><br><a href="{{ url_for('login') }}">login</a><a href="{{ url_for('logout') }}">Logout</a></div>
+
+
 {% block content %} {% endblock %}
 
 

@@ -1,14 +1,13 @@
 import connection
 
 
-
 @connection.connection_handler
 def get_user_login_data(cursor, user_name):
     cursor.execute("""
                             select user_name, password from users
-                            where user_name like %(user_name)s;""", {'user_name': user_name})
+                            where user_name like %(user_name)s;
+                """, {'user_name': user_name})
     return cursor.fetchall()
-
 
 
 @connection.connection_handler
@@ -72,11 +71,11 @@ def remove_answers(cursor, answer_id):
 
 
 @connection.connection_handler
-def add_question(cursor, message, title, image, view_number, vote_number, submission_time):
+def add_question(cursor, message, title, image, view_number, vote_number, submission_time, user_id):
     cursor.execute("""
-                    insert into question (submission_time, view_number, vote_number, title, message, image)
-                     values (%s, %s, %s, %s, %s, %s);""",
-                   (submission_time, view_number, vote_number, title, message, image))
+                    insert into question (submission_time, view_number, vote_number, title, message, image, user_id)
+                     values (%s, %s, %s, %s, %s, %s, %s);""",
+                   (submission_time, view_number, vote_number, title, message, image, user_id))
     cursor.execute("""
                     select id from question
                     where submission_time = %(submission_time)s;""", {'submission_time': submission_time})
@@ -171,7 +170,8 @@ def list_all_users(cursor):
     """)
     all_users = cursor.fetchall()
     return all_users
-  
+
+
 @connection.connection_handler
 def add_new_user(cursor, user_data):
     cursor.execute("""
@@ -179,5 +179,12 @@ def add_new_user(cursor, user_data):
                     VALUES (%s, %s, %s)
                     """, (user_data.get('user_name'), user_data.get('password'), user_data.get('registration_time')))
 
-
-
+@connection.connection_handler
+def get_user_id(cursor, username):
+    cursor.execute("""
+                    select id from users
+                    where user_name = %(username)s;""", {'username': username})
+    u_id = cursor.fetchone()
+    for u in u_id:
+        return u_id[u]
+    return 'There is no such username'

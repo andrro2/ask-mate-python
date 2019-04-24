@@ -44,7 +44,10 @@ def add_question():
         view_number = 0
         vote_number = 0
         submission_time = datetime.now()
-        user_id = data_manager.get_user_id(session['username'])
+        try:
+            user_id = data_manager.get_user_id(session['username'])
+        except KeyError:
+            user_id = None
         question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time,user_id)[0][
             'id']
         return redirect(f'/question/{question_id}')
@@ -143,30 +146,33 @@ def create_user_data():
 
 @app.route('/registration', methods=['GET', 'POST'])
 def save_new_user(message=None):
+    action = request.args.get('action')
     if request.method == 'POST':
         if data_manager.check_registration_name(request.form.get('user_name')) is None:
             data_manager.add_new_user(create_user_data())
             return redirect('/')
         else:
-            message = 'User name is already in use'
-    return render_template('login.html', message=message)
+            message = 'Username already in use'
+    return render_template('login.html', message=message, action=action)
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login(verified=None):
+def login(message=None):
+    action = request.args.get('action')
     if request.method == 'POST':
         user_name = request.form.get('user_name')
         password = request.form.get('password')
         user_login_data = data_manager.get_user_login_data(user_name)
         if len(user_login_data) == 1:
-            verified = util.verify_password(password, user_login_data[0]['password'])
-            if verified:
+            message = util.verify_password(password, user_login_data[0]['password'])
+            if message:
                 session['username'] = user_name
                 return redirect('/')
-
+            else:
+                message = 'Username or password is wrong!'
         else:
-            verified = False
-    return render_template('login.html', verified=verified)
+            message = 'Username or password is wrong!'
+    return render_template('login.html', message=message, action=action)
 
 
 @app.route('/logout')

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div id="search">
-        <p align="center"><a id="back_to_q" href="/list">Back to the questions</a></p>
+        <p id="page_head" align="center"><a id="back_to_q" href="/list">Back to the questions</a></p>
     </div><br>
     <p id="titles">{{ question[0]['title'] }}</p>
     <div id="message">{{ question[0]['message'] }}<br>
@@ -33,7 +33,7 @@
                 <p>{{ items['message'] }}
                 </p>
                 <div id="q_comments">
-                    <table>
+                    <table id="comment_table">
                         {% for comment in answer_comments[items['id']] %}
                             <tr>
                                 <td id="com_time">{{ comment['submission_time'] }}</td>

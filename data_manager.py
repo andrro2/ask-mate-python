@@ -35,17 +35,18 @@ def get_answer_data(cursor, question_id=None):
 
 
 @connection.connection_handler
-def add_answer(cursor, submission_time, vote_number, question_id, message, image):
+def add_answer(cursor, submission_time, vote_number, question_id, message, image, userid):
     cursor.execute("""
-                    insert into answer (submission_time, vote_number, question_id, message, image)
-                    values (%s, %s, %s, %s, %s);""", (submission_time, vote_number, question_id, message, image))
+                    insert into answer (submission_time, vote_number, question_id, message, image, user_id)
+                    values (%s, %s, %s, %s, %s, %s);""",
+                   (submission_time, vote_number, question_id, message, image, userid))
 
 
 @connection.connection_handler
 def remove_question(cursor, question_id):
     cursor.execute("""
                     select id from answer where question_id = %(question_id)s
-                    
+
                     """, {'question_id': question_id})
     answer_ids = cursor.fetchall()
     for item in answer_ids:
@@ -84,10 +85,10 @@ def add_question(cursor, message, title, image, view_number, vote_number, submis
 
 
 @connection.connection_handler
-def add_comment_to_question(cursor, question_id, comment, time):
+def add_comment_to_question(cursor, question_id, comment, time, userid):
     cursor.execute("""
-                        insert into comment (question_id, message, submission_time)
-                        values (%s, %s, %s);""", (question_id, comment, time))
+                        insert into comment (question_id, message, submission_time, user_id)
+                        values (%s, %s, %s, %s);""", (question_id, comment, time, userid))
 
 
 @connection.connection_handler
@@ -100,10 +101,10 @@ def get_question_comment(cursor, question_id):
 
 
 @connection.connection_handler
-def add_comment_to_answer(cursor, answer_id, comment, time):
+def add_comment_to_answer(cursor, answer_id, comment, time, userid):
     cursor.execute("""
-                        insert into comment (answer_id, message, submission_time)
-                        values (%s, %s, %s);""", (answer_id, comment, time))
+                        insert into comment (answer_id, message, submission_time, user_id)
+                        values (%s, %s, %s, %s);""", (answer_id, comment, time, userid))
 
 
 @connection.connection_handler
@@ -156,7 +157,7 @@ def search(cursor, search):
                     select DISTINCT question.* from answer
                     join question on question.id = answer.question_id
                     where answer.message ilike %(search)s or question.title ilike %(search)s or question.message ilike %(search)s;
-                    
+
                     """, {'search': search})
     questions = cursor.fetchall()
 
@@ -178,6 +179,7 @@ def add_new_user(cursor, user_data):
                     INSERT INTO users(user_name, password, registration_time)
                     VALUES (%s, %s, %s)
                     """, (user_data.get('user_name'), user_data.get('password'), user_data.get('registration_time')))
+
 
 @connection.connection_handler
 def get_user_id(cursor, username):

@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, request, make_response, session, escape
+from flask import Flask, render_template, redirect, request, make_response, session, escape, url_for
 import data_manager
 from datetime import datetime
+import util
 
 app = Flask(__name__)
 
@@ -9,7 +10,6 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def latest_questions():
-    user = 'admin'
     questions = data_manager.get_latest_five_questions()
     return render_template('main.html', questions=questions)
 
@@ -112,12 +112,28 @@ def edit_answer(answer_id: int, question_id: int):
     return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
 
 
-@app.route('/set-cookie')
-def cookie_insertion():
-    redirect_to_index = redirect('/')
-    response = make_response(redirect_to_index)
-    response.set_cookie('user', value = 'admin')
-    return response
+@app.route('/login', methods=['GET', 'POST'])
+def login(verified=None):
+    if request.method == 'POST':
+        user_name = request.form.get('user_name')
+        password = request.form.get('password')
+        user_login_data = data_manager.get_user_login_data(user_name)
+        if len(user_login_data) == 1:
+            verified = util.verify_password(password, user_login_data[0]['password'])
+            if verified:
+                session['username'] = user_name
+                return redirect('/')
+
+        else:
+            verified = False
+            return redirect('/login', verified=verified)
+    return render_template('login.html', verified=verified)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect('/')
 
 
 if __name__ == '__main__':

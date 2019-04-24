@@ -6,19 +6,8 @@
     <title>Ask-mate</title>
 </head>
 <body>
-<script>
-    var name = 'user'
-    function getCookie(name) {
-        var user_name = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-        return user_name ? user_name[2] : null;
-    }
-    var user_name = getCookie(name)
-    function myFunction(user_name) {
-  document.getElementById("login").innerHTML = "You logged in as " + user_name;
-}
-</script>
-<div id="header"><p id="login">aaaaaaa</p></div>
-<script>myFunction(user_name)</script>
+<div><p>{{ session['username'] }}</p><br><a href="{{ url_for('login') }}">login</a><a href="{{ url_for('logout') }}">Logout</a></div>
+
 
 {% block content %} {% endblock %}
 

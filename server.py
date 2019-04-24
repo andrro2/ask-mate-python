@@ -1,9 +1,12 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, make_response, session, escape, url_for
 import data_manager
 from datetime import datetime
 import bcrypt
+import util
 
 app = Flask(__name__)
+
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route('/')
@@ -126,6 +129,30 @@ def save_new_user():
         data_manager.add_new_user(create_user_data())
         return redirect('/')
     return render_template('login.html')
+
+  
+@app.route('/login', methods=['GET', 'POST'])
+def login(verified=None):
+    if request.method == 'POST':
+        user_name = request.form.get('user_name')
+        password = request.form.get('password')
+        user_login_data = data_manager.get_user_login_data(user_name)
+        if len(user_login_data) == 1:
+            verified = util.verify_password(password, user_login_data[0]['password'])
+            if verified:
+                session['username'] = user_name
+                return redirect('/')
+
+        else:
+            verified = False
+            return redirect('/login', verified=verified)
+    return render_template('login.html', verified=verified)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect('/')
 
 
 if __name__ == '__main__':

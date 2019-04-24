@@ -1,5 +1,14 @@
 import connection
 
+
+@connection.connection_handler
+def get_user_login_data(cursor, user_name):
+    cursor.execute("""
+                            select user_name, password from users
+                            where user_name like %(user_name)s;""", {'user_name': user_name})
+    return cursor.fetchall()
+
+
 @connection.connection_handler
 def get_question_data(cursor, question_id=None):
     if question_id:

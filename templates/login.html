@@ -2,12 +2,13 @@
 {% block content %}
     <form method="POST">
         <p>user name</p><br>
-        <input name="user_name"><br>
+        <input name="user_name" required><br>
         <br><p>password</p><br>
-        <input name="password" type="password"><br>
+        <input name="password" type="password" required><br>
         <input type="submit" value="Submit">
         {% if verified == False %}
             <p>User Name or Password is Wrong</p>
         {% endif %}
+        <p>{{ message if message != None }}</p>
     </form>
 {% endblock %}

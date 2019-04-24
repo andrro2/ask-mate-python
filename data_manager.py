@@ -190,3 +190,12 @@ def get_user_id(cursor, username):
     for u in u_id:
         return u_id[u]
     return 'There is no such username'
+
+
+@connection.connection_handler
+def check_registration_name(cursor, regi_name):
+    cursor.execute("""
+                    select user_name from users 
+                    where user_name = %(regi_name)s;""", {'regi_name': regi_name})
+    result = cursor.fetchone()
+    return result

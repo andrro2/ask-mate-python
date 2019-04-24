@@ -142,11 +142,14 @@ def create_user_data():
 
 
 @app.route('/registration', methods=['GET', 'POST'])
-def save_new_user():
+def save_new_user(message=None):
     if request.method == 'POST':
-        data_manager.add_new_user(create_user_data())
-        return redirect('/')
-    return render_template('login.html')
+        if data_manager.check_registration_name(request.form.get('user_name')) is None:
+            data_manager.add_new_user(create_user_data())
+            return redirect('/')
+        else:
+            message = 'User name is already in use'
+    return render_template('login.html', message=message)
 
 
 @app.route('/login', methods=['GET', 'POST'])

@@ -3,17 +3,32 @@
 <head>
     <link rel="stylesheet" href="/static/theme.css">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <title>Ask-mate</title>
 </head>
 <body>
-<div><p>{{ 'You are logged in as ' + session['username'] if session['username'] is defined else 'You are not logged in'}}</p><br>
+<div class="logedin_as">
+    <p>
+        {% if session['username'] is defined %}
+            <i class="glyphicon glyphicon-user"></i>
+            <p>{{ session['username'] }}</p>
+        {% else %}
+            You are not logged in
+        {% endif %}
+    </p>
     {% if session['username'] is defined %}
-    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+        <a href="{{ url_for('logout') }}">
+            <button>Logout</button>
+        </a>
     {% else %}
-        <a href="{{ url_for('login') }}"><button>Login</button></a>
-        <a href="{{ url_for('save_new_user') }}"><button>Register</button></a>
+        <a href="{{ url_for('login') }}">
+            <button id="search_button">Login</button>
+        </a>
+        <a href="{{ url_for('save_new_user') }}">
+            <button id="search_button">Register</button>
+        </a>
     {% endif %}
-
+</div>
 {% block content %} {% endblock %}
 
 

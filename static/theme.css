@@ -22,6 +22,7 @@
     border: 0 none;
     cursor: pointer;
     border-radius: 5px;
+    color: rgba(0, 0, 0, .7);
 }
 
 #navigation_link {
@@ -391,4 +392,26 @@ input[type=text], textarea {
     font-style: italic;
     color: rgba(255, 255, 255, 0.6);
     margin: 0;
+}
+
+.logedin_as {
+    display: inline;
+    text-align: right;
+    position: absolute;
+    right: 5px;
+}
+
+.logedin_as p {
+    display: inline;
+    color: whitesmoke;
+    white-space: nowrap;
+}
+
+.logedin_as button {
+    font-weight: bold;
+    margin: 0% 0% 0% 0%;
+}
+
+.logedin_as a {
+    text-decoration: none;
 }

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, make_response, session, escape, url_for
+from flask import Flask, render_template, redirect, request, make_response, session, escape, url_for , Markup
 import data_manager
 from datetime import datetime
 import bcrypt

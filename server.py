@@ -163,7 +163,6 @@ def login(verified=None):
 
         else:
             verified = False
-            return redirect('/login', verified=verified)
     return render_template('login.html', verified=verified)
 
 

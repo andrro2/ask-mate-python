@@ -57,7 +57,11 @@ def add_answer(question_id: int):
         image = request.form.get('picture')
         submission_time = datetime.now()
         vote_number = 0
-        data_manager.add_answer(submission_time, vote_number, question_id, message, image)
+        try:
+            userid = data_manager.get_user_id(session['username'])
+        except KeyError:
+            userid = None
+        data_manager.add_answer(submission_time, vote_number, question_id, message, image, userid)
         return redirect(f'/question/{question_id}')
 
     return render_template('add_answer.html', question_id=question_id)
@@ -80,18 +84,25 @@ def add_question_comment(question_id: int):
     if request.method == 'POST':
         user_comment = request.form.get('comment')
         now_time = datetime.now()
-        data_manager.add_comment_to_question(question_id, user_comment, now_time)
+        try:
+            userid = data_manager.get_user_id(session['username'])
+        except KeyError:
+            userid = None
+        data_manager.add_comment_to_question(question_id, user_comment, now_time, userid)
         return redirect(f'/question/{question_id}')
     return render_template('add_comment_question.html', question_id=question_id)
 
 
 @app.route('/answer/<question_id>&<answer_id>/add_comment', methods=['GET', 'POST'])
 def add_answer_comment(answer_id: int, question_id: int):
-    print(answer_id)
     if request.method == 'POST':
         user_comment = request.form.get('comment')
         now_time = datetime.now()
-        data_manager.add_comment_to_answer(answer_id, user_comment, now_time)
+        try:
+            userid = data_manager.get_user_id(session['username'])
+        except KeyError:
+            userid = None
+        data_manager.add_comment_to_answer(answer_id, user_comment, now_time, userid)
         return redirect(f'/question/{question_id}')
     return render_template('add_comment_answer.html', answer_id=answer_id, question_id=question_id)
 
@@ -113,12 +124,12 @@ def edit_answer(answer_id: int, question_id: int):
     return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
 
 
-
 @app.route('/list-users')
 def list_users():
     all_users = data_manager.list_all_users()
     return render_template('list_users.html', users=all_users)
-  
+
+
 def create_user_data():
     passwd = util.hash_password(request.form.get('password'))
     user_data = {
@@ -136,7 +147,7 @@ def save_new_user():
         return redirect('/')
     return render_template('login.html')
 
-  
+
 @app.route('/login', methods=['GET', 'POST'])
 def login(verified=None):
     if request.method == 'POST':

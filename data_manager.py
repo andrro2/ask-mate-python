@@ -5,7 +5,8 @@ import connection
 def get_user_login_data(cursor, user_name):
     cursor.execute("""
                             select user_name, password from users
-                            where user_name like %(user_name)s;""", {'user_name': user_name})
+                            where user_name like %(user_name)s;
+                """, {'user_name': user_name})
     return cursor.fetchall()
 
 
@@ -71,11 +72,11 @@ def remove_answers(cursor, answer_id):
 
 
 @connection.connection_handler
-def add_question(cursor, message, title, image, view_number, vote_number, submission_time):
+def add_question(cursor, message, title, image, view_number, vote_number, submission_time, user_id):
     cursor.execute("""
-                    insert into question (submission_time, view_number, vote_number, title, message, image)
-                     values (%s, %s, %s, %s, %s, %s);""",
-                   (submission_time, view_number, vote_number, title, message, image))
+                    insert into question (submission_time, view_number, vote_number, title, message, image, user_id)
+                     values (%s, %s, %s, %s, %s, %s, %s);""",
+                   (submission_time, view_number, vote_number, title, message, image, user_id))
     cursor.execute("""
                     select id from question
                     where submission_time = %(submission_time)s;""", {'submission_time': submission_time})

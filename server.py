@@ -44,7 +44,8 @@ def add_question():
         view_number = 0
         vote_number = 0
         submission_time = datetime.now()
-        question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time)[0][
+        user_id = data_manager.get_user_id(session['username'])
+        question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time,user_id)[0][
             'id']
         return redirect(f'/question/{question_id}')
     return render_template('add_question.html')

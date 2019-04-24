@@ -113,6 +113,12 @@ def edit_answer(answer_id: int, question_id: int):
     return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
 
 
+
+@app.route('/list-users')
+def list_users():
+    all_users = data_manager.list_all_users()
+    return render_template('list_users.html', users=all_users)
+  
 def create_user_data():
     passwd = util.hash_password(request.form.get('password'))
     user_data = {

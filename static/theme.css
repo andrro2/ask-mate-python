@@ -29,7 +29,7 @@
     font-family: Courier New;
     font-size: large;
     color: whitesmoke;
-    margin: 2% 0% 0% 0%;
+    margin: 2% 35% 1% -4%;
     border-radius: 4px;
     border: 1px solid;
     display: inline-block;
@@ -119,10 +119,27 @@ body {
 
 }
 
+.to_home {
+    text-decoration: none;
+    font-family: Courier New;
+    font-size: large;
+    color: whitesmoke;
+    margin: 2% 0% 1% 0%;
+    border-radius: 4px;
+    border: 1px solid;
+    display: inline-block;
+
+}
+
+.to_home:hover {
+    border-radius: 4px;
+    box-shadow: 0px 0px 35px 25px rgba(0, 0, 0, 0.4);
+}
+
 
 #absolute {
-    background-color: rgba(0,0,0,0.4);
-    box-shadow: 0px 0px 20px 20px rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.4);
     margin: 2% 5% 0% 5%;
     color: whitesmoke;
 }
@@ -341,4 +358,37 @@ input[type=text], textarea {
 #a_comment {
     font-style: italic;
     font-size: small;
+}
+
+.users {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.4);
+    margin: 2% 35% 0% 35%;
+    color: whitesmoke;
+    text-align: center;
+}
+
+.users p {
+    display: inline;
+}
+
+
+#user_name {
+    font-size: x-large;
+
+}
+
+#user_regist {
+    font-weight: lighter;
+    font-style: italic;
+    font-size: small;
+    margin: 0% 0% 0% 5%;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#user_regist_time {
+    font-weight: lighter;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
 }

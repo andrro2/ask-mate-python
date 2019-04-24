@@ -1,8 +1,12 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, make_response, session, escape, url_for
 import data_manager
 from datetime import datetime
+import bcrypt
+import util
 
 app = Flask(__name__)
+
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route('/')
@@ -109,10 +113,53 @@ def edit_answer(answer_id: int, question_id: int):
     return render_template('edit_answer.html', answer_id=answer_id, text=text, question_id=question_id)
 
 
+
 @app.route('/list-users')
 def list_users():
     all_users = data_manager.list_all_users()
     return render_template('list_users.html', users=all_users)
+  
+def create_user_data():
+    passwd = util.hash_password(request.form.get('password'))
+    user_data = {
+        'user_name': request.form.get('user_name'),
+        'password': passwd,
+        'registration_time': datetime.now()
+    }
+    return user_data
+
+
+@app.route('/registration', methods=['GET', 'POST'])
+def save_new_user():
+    if request.method == 'POST':
+        data_manager.add_new_user(create_user_data())
+        return redirect('/')
+    return render_template('login.html')
+
+  
+@app.route('/login', methods=['GET', 'POST'])
+def login(verified=None):
+    if request.method == 'POST':
+        user_name = request.form.get('user_name')
+        password = request.form.get('password')
+        user_login_data = data_manager.get_user_login_data(user_name)
+        if len(user_login_data) == 1:
+            verified = util.verify_password(password, user_login_data[0]['password'])
+            if verified:
+                session['username'] = user_name
+                return redirect('/')
+
+        else:
+            verified = False
+            return redirect('/login', verified=verified)
+    return render_template('login.html', verified=verified)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(

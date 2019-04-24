@@ -1,6 +1,16 @@
 import connection
 
 
+
+@connection.connection_handler
+def get_user_login_data(cursor, user_name):
+    cursor.execute("""
+                            select user_name, password from users
+                            where user_name like %(user_name)s;""", {'user_name': user_name})
+    return cursor.fetchall()
+
+
+
 @connection.connection_handler
 def get_question_data(cursor, question_id=None):
     if question_id:
@@ -161,3 +171,13 @@ def list_all_users(cursor):
     """)
     all_users = cursor.fetchall()
     return all_users
+  
+@connection.connection_handler
+def add_new_user(cursor, user_data):
+    cursor.execute("""
+                    INSERT INTO users(user_name, password, registration_time)
+                    VALUES (%s, %s, %s)
+                    """, (user_data.get('user_name'), user_data.get('password'), user_data.get('registration_time')))
+
+
+

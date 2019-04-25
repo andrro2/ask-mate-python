@@ -163,14 +163,14 @@ body {
 .to_home:hover {
     color: whitesmoke;
     text-decoration: none;
-    border-color:  #2ecc71;
+    border-color: #2ecc71;
 }
 
 
 #absolute {
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.4);
-    margin: 2% 5% 0% 5%;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.7);
+    margin: 4% 5% 0% 5%;
     color: whitesmoke;
 }
 
@@ -181,9 +181,8 @@ body {
     margin: 2%;
 }
 
-
 td {
-    padding: 0px 4px;
+    padding: 1px;
 }
 
 #page_head {
@@ -249,6 +248,7 @@ td {
 #add_comment:hover {
     border-color: #2ecc71;
 }
+
 #comment_table {
     margin: 0% 0% 1% 0%;
 }
@@ -386,12 +386,13 @@ input[type=text], textarea {
 #a_comment {
     font-style: italic;
     font-size: small;
+    padding: 5px;
 }
 
 .users {
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.4);
-    margin: 2% 35% 0% 35%;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.7);
+    margin: 4% 35% 0% 35%;
     color: whitesmoke;
     text-align: center;
 }
@@ -422,7 +423,7 @@ input[type=text], textarea {
 }
 
 .logedin_as {
-    width: 50%;
+    width: 30%;
     display: inline;
     text-align: right;
     position: absolute;
@@ -461,7 +462,7 @@ input[type=text], textarea {
     color: whitesmoke;
     font-weight: bold;
     font-size: medium;
-    margin: 7% 0% 0% 0%;
+    margin: 4% 0% 0% 0%;
     display: inline-block;
     width: 400px;
     height: 400px;
@@ -492,6 +493,7 @@ input[type=text], textarea {
 }
 
 #submit_user {
+    width: 180px;
     background: none;
     margin: 0px auto 10px;
     text-align: center;
@@ -564,4 +566,22 @@ input[type=text], textarea {
 
 #textarea:focus {
     border-color: #2ecc71;
+}
+
+#disabled_comment {
+    padding: 6px 21px;
+    cursor: pointer;
+    font-size: small;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    border: 2px solid #823800;
+    outline: none;
+    color: gray;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+#disabled_comment:hover {
+    border-color: #ff6100;
 }

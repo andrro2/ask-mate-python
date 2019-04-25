@@ -24,11 +24,22 @@
             <p>There is no answer for this question.</p>
         {% else %}
             {% for items in answers %}
-                <p><a id="remove"
-                      href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">&#x2613</a>
+                <p>
+                    {% if user_id == items['user_id'] %}
+                     <a id="remove"
+                        href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">&#x2613</a>
+                    {% elif session['username'] == 'Admin' %}
+                         <a id="remove"
+                        href="{{ url_for('remove_answer', answer_id = items['id'], question_id = question_id) }}">&#x2613</a>
+                    {% endif %}
                     {{ items['vote_number'] }}
+                    {% if user_id == items['user_id'] %}
+                    <a id="add_comment"
+                       href="{{ url_for('edit_answer', answer_id = items['id'], text = items['message'], question_id=question_id)  }}">Edit</a>
+                    {% elif session['username'] == 'Admin' %}
                     <a id="add_comment"
                        href="{{ url_for('edit_answer', answer_id = items['id'], text = items['message'], question_id=question_id) }}">Edit</a>
+                    {% endif %}
                 </p>
                 <p>{{ items['message'] }}
                 </p>

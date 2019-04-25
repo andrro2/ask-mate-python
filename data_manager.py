@@ -155,7 +155,7 @@ def edit_answer(cursor, answer_id, message):
 def search(cursor, search):
     cursor.execute("""
                     select DISTINCT question.* from answer
-                    join question on question.id = answer.question_id
+                    full join question on question.id = answer.question_id
                     where answer.message ilike %(search)s or question.title ilike %(search)s or question.message ilike %(search)s;
 
                     """, {'search': search})

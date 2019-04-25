@@ -12,13 +12,21 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @app.route('/')
 def latest_questions():
     questions = data_manager.get_latest_five_questions()
-    return render_template('main.html', questions=questions)
+    try:
+        user_id = data_manager.get_user_id(session['username'])
+    except KeyError:
+        user_id = ''
+    return render_template('main.html', questions=questions , user_id=user_id)
 
 
 @app.route('/list')
 def list_route():
     questions = sorted(data_manager.get_question_data(), key=lambda key: key['submission_time'], reverse=True)
-    return render_template('all_questions.html', questions=questions)
+    try:
+        user_id = data_manager.get_user_id(session['username'])
+    except KeyError:
+        user_id = ''
+    return render_template('all_questions.html', questions=questions, user_id=user_id)
 
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
@@ -28,11 +36,15 @@ def route_selected_question(question_id: int):
     question_comments = data_manager.get_question_comment(question_id)
     answer_ids = data_manager.get_answer_ids(question_id)
     answer_comments = {}
+    try:
+        user_id = data_manager.get_user_id(session['username'])
+    except KeyError:
+        user_id = ''
     for a_id in answer_ids:
         for i in a_id:
             answer_comments[a_id[i]] = data_manager.get_answer_comment(a_id[i])
     return render_template('question.html', question=question, question_id=question_id, answers=answers,
-                           question_comments=question_comments, answer_comments=answer_comments)
+                           question_comments=question_comments, answer_comments=answer_comments, user_id=user_id)
 
 
 @app.route('/add_question', methods=['GET', 'POST'])
@@ -47,7 +59,7 @@ def add_question():
         try:
             user_id = data_manager.get_user_id(session['username'])
         except KeyError:
-            user_id = None
+            user_id = ''
         question_id = data_manager.add_question(message, title, image, view_number, vote_number, submission_time,user_id)[0][
             'id']
         return redirect(f'/question/{question_id}')
@@ -102,10 +114,6 @@ def add_answer_comment(answer_id: int, question_id: int):
     if request.method == 'POST':
         user_comment = request.form.get('comment')
         now_time = datetime.now()
-        try:
-            userid = data_manager.get_user_id(session['username'])
-        except KeyError:
-            userid = None
         data_manager.add_comment_to_answer(answer_id, user_comment, now_time, userid)
         return redirect(f'/question/{question_id}')
     return render_template('add_comment_answer.html', answer_id=answer_id, question_id=question_id)
@@ -113,9 +121,13 @@ def add_answer_comment(answer_id: int, question_id: int):
 
 @app.route('/search')
 def search():
+    try:
+        userid = data_manager.get_user_id(session['username'])
+    except KeyError:
+        userid = ''
     search = '%' + request.args.get('search') + '%'
     questions = data_manager.search(search)
-    return render_template('main.html', questions=questions, search=search)
+    return render_template('main.html', questions=questions, search=search, user_id=userid )
 
 
 @app.route('/answer/<answer_id>&<question_id>/edit', methods=['GET', 'POST'])

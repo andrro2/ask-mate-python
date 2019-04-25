@@ -24,6 +24,10 @@
             {% if verified == False %}
                 <p>User Name or Password is Wrong</p>
             {% endif %}
+            {% if action == 'Login' %}
+                <a href="{{ url_for('save_new_user', action='Sign up') }}">
+                <input id="submit_user" type="button" value="Sign up"></a>
+            {% endif %}
             <p id="error_message">{{ message if message != None and message != True }}</p>
         </form>
     </div>

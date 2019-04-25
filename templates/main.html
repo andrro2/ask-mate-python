@@ -13,10 +13,16 @@
     </div>
         <div id='absolute'>
         {% for question in questions %}
-            <br><strong><a id="questions"
+            <strong><a id="questions"
                            href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{ question['title'] }}</a></strong>
-            <a id="remove"
-               href="{{ url_for('remove_question', question_id = question['id']) }}">&#x2613</a><br>
+            {% if user_id == question['user_id'] %}
+                <a id="remove"
+                   href="{{ url_for('remove_question', question_id = question['id']) }}">&#x2613</a>
+            {% elif session['username'] == 'Admin' %}
+                <a id="remove"
+                   href="{{ url_for('remove_question', question_id = question['id']) }}">&#x2613</a>
+            {% endif %}
+            <br><br>
         {% endfor %}
     </div>
     <br><br>

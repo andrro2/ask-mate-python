@@ -1,12 +1,18 @@
 {% extends 'layout.html' %}
 {% block content %}
+    <div id="search">
+        <p id="page_head" align="center">Add answer</p>
+    </div>
+    <div>
+        <p align="center"><a class="to_home" href="/">Home page</a></p>
+    </div>
     <div align="center">
-        <div id="add_form">
+        <div class="add_form">
             <form action="{{ url_for('add_answer', question_id=question_id) }}" , method="POST">
-                <p>Your answer to the question</p>
-                <textarea name="message" rows="20" cols="40"></textarea>
+                <h1 id="label">Your answer to the question</h1>
+                <textarea name="message" id="textarea" rows="10" cols="40"></textarea>
                 <br>
-                <input id="submit_q_a" type="submit" value="Submit answer">
+                <input id="submit_user" type="submit" value="Submit answer">
             </form>
         </div>
     </div>

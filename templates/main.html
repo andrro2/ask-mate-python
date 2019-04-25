@@ -3,17 +3,26 @@
     <div id="search">
         <p align="center" id="page_head">Latest questions</p>
         <form action="/search" method="get">
-            <input id="search_box" name="search" type="search">
+            <input id="search_box" autocomplete="off" name="search" type="search">
             <input id="search_button" type="submit" value="Search">
         </form>
     </div>
-    <p align="center"><a id="navigation_link" href="/list">List all questions</a></p>
-    <div id='absolute'>
+    <div class="main_nav">
+        <p style="margin: 3% 0% 3% 0%;" align="center"><a id="navigation_link" href="/list-users">List users</a>
+        <a id="navigation_link" href="/list">List all questions</a></p>
+    </div>
+        <div id='absolute'>
         {% for question in questions %}
-            <br><strong><a id="questions"
+            <strong><a id="questions"
                            href="{{ url_for('route_selected_question', question_id = question['id']) }}">{{ question['title'] }}</a></strong>
-            <a id="remove"
-               href="{{ url_for('remove_question', question_id = question['id']) }}">&#x2613</a><br>
+            {% if user_id == question['user_id'] %}
+                <a id="remove"
+                   href="{{ url_for('remove_question', question_id = question['id']) }}">&#x2613</a>
+            {% elif session['username'] == 'Admin' %}
+                <a id="remove"
+                   href="{{ url_for('remove_question', question_id = question['id']) }}">&#x2613</a>
+            {% endif %}
+            <br><br>
         {% endfor %}
     </div>
     <br><br>

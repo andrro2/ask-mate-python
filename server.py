@@ -114,7 +114,11 @@ def add_answer_comment(answer_id: int, question_id: int):
     if request.method == 'POST':
         user_comment = request.form.get('comment')
         now_time = datetime.now()
-        data_manager.add_comment_to_answer(answer_id, user_comment, now_time, userid)
+        try:
+            user_id = data_manager.get_user_id(session['username'])
+        except:
+            user_id = ''
+        data_manager.add_comment_to_answer(answer_id, user_comment, now_time,user_id)
         return redirect(f'/question/{question_id}')
     return render_template('add_comment_answer.html', answer_id=answer_id, question_id=question_id)
 

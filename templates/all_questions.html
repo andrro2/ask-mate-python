@@ -26,7 +26,9 @@
         {% endfor %}
     </div>
     <br><br>
-    <p align="center"><a id="add_question" href="/add_question">Add
-        new
-        question &#x270E</a></p>
+    {% if session['username'] is defined %}
+        <p align="center"><a id="add_question" href="/add_question">Add
+            new
+            question &#x270E</a></p>
+    {% endif %}
 {% endblock %}
